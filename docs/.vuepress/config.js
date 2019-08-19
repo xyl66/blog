@@ -52,6 +52,7 @@ module.exports = {
     nav: [
       { text: '首页', link: '/' },
       { text: '随笔', link: '/article/' },
+      { text: '面试', link: '/work/' },
       { text: 'CSDN', link: 'https://blog.csdn.net/a8725585' },
     ]
   }
