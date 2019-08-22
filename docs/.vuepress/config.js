@@ -48,7 +48,7 @@ module.exports = {
   themeConfig: {
     sidebar: sider,
     sidebarDepth: 2,
-    lastUpdated: 'Last Updated', // 文档更新时间：每个文件git最后提交的时间
+    lastUpdated: '最后更新时间', // 文档更新时间：每个文件git最后提交的时间
     nav: [
       { text: '首页', link: '/' },
       { text: '随笔', link: '/article/' },
