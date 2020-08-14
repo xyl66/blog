@@ -15,8 +15,8 @@ expect -c "
   set timeout 1;
   spawn scp -r ./ root@132.232.60.166:~/static/doc/;
   expect {
-      *yes/no* { send "yes"; exp_continue }
-      *password:* { send "x$7IMCE%3n0$ZZmH" }  
+      *yes/no* { send \"yes\r\"; exp_continue }
+      *password:* { send \"x$7IMCE%3n0$ZZmH\r\" }  
     }
   interact
 "
