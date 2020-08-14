@@ -2,7 +2,7 @@ language: node_js
 addons:
   apt:
     packages:
-    - sshpass
+    - expect
 sudo: required
 node_js:
   - "lts/*"
@@ -10,11 +10,5 @@ cache:
   directories:
     - node_modules
 script:
-  - npm run build
-after_success:
-- export SSHPASS=$DEPLOY_PASS
-
-# 直接将产物scp到vps太慢了，国外服务器传国内服务器。
-- sshpass -p $DEPLOY_PASS scp  -o stricthostkeychecking=no -r ./docs/.vuepress/dist/* root@132.232.60.166:~/static/doc/
-
+  - ./deploy1.sh
 branch: master
