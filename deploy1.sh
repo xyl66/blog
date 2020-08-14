@@ -11,7 +11,7 @@ cd docs/.vuepress/dist
 
 # 如果是发布到自定义域名
 # echo 'www.example.com' > CNAME
-expect -c "
+expect -c '
   set timeout 1;
   spawn scp -r ./ root@132.232.60.166:~/static/doc/;
   expect {
@@ -19,5 +19,5 @@ expect -c "
       *password:* { send "x$7IMCE%3n0$ZZmH\r" }  
     }
   interact
-"
+'
 cd -
