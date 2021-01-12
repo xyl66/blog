@@ -289,16 +289,41 @@ w3c中定义的事件发生的过程的3个阶段：
   - 回收触发时机
 
 ## Vue
-### 1.v-for中为什么要绑定key值
+<details>
+<summary>
+1.v-for中为什么要绑定key值
+</summary>
+
   - 为了跟踪每个节点的身份，从而重用和重新排序现有元素
   - 默认使用“就地更新”的策略。如果数据项的顺序被改变，Vue 将不会移动 DOM 元素来匹配数据项的顺序，而是就地更新每个元素，并且确保它们在每个索引位置正确渲染
+</details>
 
-### 2.什么是具名插槽、作用域插槽
+<details>
+<summary>
+2.什么是具名插槽、作用域插槽
+</summary>
+  
+</details>
 
-### 3.计算属性的getter、setter有什么用
+<details>
+<summary>
+3.计算属性的getter、setter有什么用
+</summary>
+  
   - setter给计算属性赋值时会调用
+</details>
 
-### 4.methods中可以使用箭头函数吗，为什么？
+<details>
+<summary>
+4.methods中可以使用箭头函数吗，为什么？
+</summary>
+  
   - 不能，无法获取到vue实例
+</details>
 
-### 5.组件传值有哪些方法
+<details>
+<summary>
+5.组件传值有哪些方法
+</summary>
+  
+</details>

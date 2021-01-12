@@ -12,6 +12,12 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "husky": "^4.3.7",
     "vuepress": "^1.5.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "./deploy.sh"
+    }
   }
 }
