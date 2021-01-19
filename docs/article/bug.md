@@ -25,17 +25,17 @@ google 开发者提出了一种 RAIL 模型来衡量应用性能，即：Respons
 ### 1.页面访问速度：白屏、首屏时间、可交互时间
 
 我们来看看 google 开发者针对用户体验，提出的几个性能指标
-![图片](https://mmbiz.qpic.cn/mmbiz_jpg/YBFV3Da0NwsKDJJUkJTEwLBWnTCxr1TrAN8M9xFY2NTLIZZIDA8m8licibAI1wzJYFk6nYVXAdibXvUhFzMkkuLTg/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![图片](https://tva1.sinaimg.cn/large/006tNbRwgy1gah51k3lg8j31bi0gg45d.jpg)
 
 这几个指标其实都是根据用户体验，提炼出对应的性能指标
-![图片](https://mmbiz.qpic.cn/mmbiz_jpg/YBFV3Da0NwsKDJJUkJTEwLBWnTCxr1TrREal8WaTfRmnagkPaayrjSmsY1EOROeQYDGQ6W5s1Rqia0qG9ibRMtZg/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![图片](https://tva1.sinaimg.cn/large/006tNbRwgy1gah52b9pkrj30v00bwabn.jpg)
 
 #### 1）first paint (FP) and first contentful paint (FCP)
 
 首次渲染、首次有内容的渲染
 
 这两个指标浏览器已经标准化了，从 performance 的 The Paint Timing API 可以获取到，一般来说两个时间相同，但也有情况下两者不同。
-![图片](https://mmbiz.qpic.cn/mmbiz_jpg/YBFV3Da0NwsKDJJUkJTEwLBWnTCxr1Tr3d2MFqhG5Z8k1DaoybHVgibZqhSWr17JFh8EHPUbfaJaFD0oSlqO2ag/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![图片](https://tva1.sinaimg.cn/large/006tNbRwgy1gah52tov3jj30pa0gagod.jpg)
 
 #### 2）First meaningful paint and hero element timing
 
@@ -52,7 +52,7 @@ google lighthouse 定义的 first meaningful paint：https://docs.google.com/doc
 #### 4）长任务
 
 浏览器是单线程的，如果长任务过多，那必然会影响着用户响应时长。好的应用需要最大化空闲时间，以保证能最快响应用户的输入。
-![图片](https://mmbiz.qpic.cn/mmbiz_jpg/YBFV3Da0NwsKDJJUkJTEwLBWnTCxr1TrrOLfjBmibZl8fibsyo9T51icbJia9nicGA6oHPMKU0L5hGDMTGxFDqQ0IQA/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![图片](https://tva1.sinaimg.cn/large/006tNbRwgy1gah53416gmj31bg0kgn9i.jpg)
 
 ### 2.页面稳定性：页面出错情况
 
@@ -78,7 +78,7 @@ web 性能监控可分为两类，一类是合成监控（Synthetic Monitoring�
 展示了白屏、首屏、可交互时间等性能指标和 SEO、PWA 等。
 
 腾讯文档移动端官网首页测速结果：
-![图片](https://mmbiz.qpic.cn/mmbiz_jpg/YBFV3Da0NwsKDJJUkJTEwLBWnTCxr1TrbuDWRCZicyxT64UAUpk6TS2lWHp8iaibEZkw8QZ9c57ib2ianLAAaYPMicjQ/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![图片](https://tva1.sinaimg.cn/large/006tNbRwgy1gah53h9fohj30u01d37fc.jpg)
 
 #### 2. PageSpeed
 
@@ -87,21 +87,21 @@ https://developers.google.com/speed/pagespeed/insights/
 不仅展示了一些主要的性能指标数据，还给出了部分性能优化建议。
 
 腾讯文档移动端首页测速结果和性能优化建议：
-![图片](https://mmbiz.qpic.cn/mmbiz_jpg/YBFV3Da0NwsKDJJUkJTEwLBWnTCxr1TrIGJgDhLWCSHOGqCH4XrbcJPD92M5w5mw4eSYicgRooqQmLpelrIHtzw/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![图片](https://tva1.sinaimg.cn/large/006tNbRwgy1gah53rtaaij30u01b4n8n.jpg)
 
 #### 3. WebPageTest
 
 WebPageTest
 
 给出性能测速结果和资源加载的瀑布图。
-![图片](https://mmbiz.qpic.cn/mmbiz_jpg/YBFV3Da0NwsKDJJUkJTEwLBWnTCxr1TrzlibI6e5UmGXyQw5L40bFxGUCTn2mAuS9yzaUibXJAHYzvdcK2lQ8okw/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![图片](https://tva1.sinaimg.cn/large/006tNbRwgy1gah546pqeij30vw0u0wv2.jpg)
 
 #### 4. Pingdom
 
 https://www.pingdom.com/
 
 注意：Pingdom 不仅提供合成监控，也提供真实用户监控。
-![图片](https://mmbiz.qpic.cn/mmbiz_jpg/YBFV3Da0NwsKDJJUkJTEwLBWnTCxr1TrjeR5m2cKrwGkK8PJ2vJ5jXTMICcx67icgAl4qYv8k9iaiaEqg6GpiclCXw/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![图片](https://tva1.sinaimg.cn/large/006tNbRwgy1gah54gtu29j311d0u0tie.jpg)
 
 合成监控方式的优缺点：
 
@@ -115,25 +115,25 @@ https://www.pingdom.com/
 ### 二、真实用户监控
 
 真实用户监控是一种被动监控技术，是一种应用服务，被监控的 web 应用通过 sdk 等方式接入该服务，将真实的用户访问、交互等性能指标数据收集上报、通过数据清洗加工后形成性能分析报表。例如 `FrontJs`、`oneapm`、`Datadog` 等。
-![图片](https://mmbiz.qpic.cn/mmbiz_jpg/YBFV3Da0NwsKDJJUkJTEwLBWnTCxr1TrzAY9KbXZ8lt4q6jSHk6NtIR840OlS2JpQNyDFLZqGDW8xDeKXTxFIg/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![图片](https://tva1.sinaimg.cn/large/006tNbRwgy1gah55go4uwj31mq0b2q50.jpg)
 
 #### 1. oneapm
 
 https://www.oneapm.com/bi/feature.html
 
 功能包括：大盘数据、特征统计、慢加载追踪、访问页面、脚本错误、AJAX、组合分析、报表、告警等。
-![图片](https://mmbiz.qpic.cn/mmbiz_jpg/YBFV3Da0NwsKDJJUkJTEwLBWnTCxr1Tr9tvRiayecyY12s08b02nMav2icht8AdmxUnoaTnkng02GrgPSvnSwgOQ/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![图片](https://tva1.sinaimg.cn/large/006tNbRwgy1gah5546jc8j31vd0u07nj.jpg)
 ##### 2. Datadog
 
 https://www.datadoghq.com/rum/
-![图片](https://mmbiz.qpic.cn/mmbiz_jpg/YBFV3Da0NwsKDJJUkJTEwLBWnTCxr1Tr9tvRiayecyY12s08b02nMav2icht8AdmxUnoaTnkng02GrgPSvnSwgOQ/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![图片](https://tva1.sinaimg.cn/large/006tNbRwgy1gah55pv17yj31gf0u0x5y.jpg)
 
 #### 3. FrontJs
 
 https://www.frontjs.com/
 
 功能包括：访问性能、异常监控、报表、趋势等。
-![图片](https://mmbiz.qpic.cn/mmbiz_jpg/YBFV3Da0NwsKDJJUkJTEwLBWnTCxr1TrSlVsUjoCkrICqzBrAEicaLl7jXcmAwppUI6Yvydl3B578vOtsIrdzSQ/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![图片](https://tva1.sinaimg.cn/large/006tNbRwgy1gah55yona3j31sy0u01ff.jpg)
 
 这种监控方式的优缺点：
 
@@ -148,26 +148,26 @@ https://www.frontjs.com/
 performance 提供高精度的时间戳，精度可达纳秒级别，且不会随操作系统时间设置的影响。
 
 目前市场上的支持情况：主流浏览器都支持，大可放心使用。
-![图片](https://mmbiz.qpic.cn/mmbiz_jpg/YBFV3Da0NwsKDJJUkJTEwLBWnTCxr1Trf0CspkMIlea8ia0QnkEhYVnlx2dhJNaf5yW5qNrNskicFT3MEaFOn5rA/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![图片](https://tva1.sinaimg.cn/large/006tNbRwgy1gah5ba37dfj31yo0hq42c.jpg)
 
 ### 基本属性
 
-![图片](https://mmbiz.qpic.cn/mmbiz_jpg/YBFV3Da0NwsKDJJUkJTEwLBWnTCxr1TrWnrkrtvgmd0VtpGp5SgA0wdPGEvAtXSdibAL8yltMIZDOCJKae5OxtA/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![图片](https://tva1.sinaimg.cn/large/006tNbRwgy1gah5be2ewkj31tg092n0v.jpg)
 
 performance.navigation: 页面是加载还是刷新、发生了多少次重定向
-![图片](https://mmbiz.qpic.cn/mmbiz_jpg/YBFV3Da0NwsKDJJUkJTEwLBWnTCxr1TrKrxvicfibr9yWbibveCxMfNIKvCUCmMnCFKVeeib4TZibBia2xt7mS43y0Vg/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![图片](https://tva1.sinaimg.cn/large/006tNbRwgy1gah5bnvq8mj30ne05ijs4.jpg)
 
 performance.timing: 页面加载的各阶段时长
-![图片](https://mmbiz.qpic.cn/mmbiz_jpg/YBFV3Da0NwsKDJJUkJTEwLBWnTCxr1TrZVzClRfg8D44L0j0qDgRXqjicV7G1QsU2RUREYgiczMEZVpCku2V2p5A/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![图片](https://tva1.sinaimg.cn/large/006tNbRwgy1gah5bwyq4mj30mg0o0wjy.jpg)
 
 各阶段的含义：
-![图片](https://mmbiz.qpic.cn/mmbiz_jpg/YBFV3Da0NwsKDJJUkJTEwLBWnTCxr1TrtiaMk98EfhIWobD3LaZIlrlBCYe5HjsLguqPC2r8mGoLcumMuFTQjng/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![图片](https://tva1.sinaimg.cn/large/006tNbRwgy1gah5cm2r73j31g20u0x6r.jpg)
 
 performance.memory：基本内存使用情况，Chrome 添加的一个非标准扩展
-![图片](https://mmbiz.qpic.cn/mmbiz_jpg/YBFV3Da0NwsKDJJUkJTEwLBWnTCxr1TrubHxTtaLAYrfNM3yY7TZlLRS7N0mYXOwen5T8B3XEOnaaFzhPDCCfg/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![图片](https://tva1.sinaimg.cn/large/006tNbRwgy1gah5cbazibj315q06eq4i.jpg)
 
 performance.timeorigin: 性能测量开始时的时间的高精度时间戳
-![图片](https://mmbiz.qpic.cn/mmbiz_jpg/YBFV3Da0NwsKDJJUkJTEwLBWnTCxr1TrEVsAeQnScIs28na4RZ6OdsrU9gSGrqEmIPkX5lZKuGm4O3JhfhLdNg/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![图片](https://tva1.sinaimg.cn/large/006tNbRwgy1gah5cviad6j30dm026mx8.jpg)
 
 ### 基本方法
 
@@ -176,7 +176,7 @@ performance.timeorigin: 性能测量开始时的时间的高精度时间戳
 通过这个方法可以获取到所有的 `performance` 实体对象，通过 `getEntriesByName` 和 `getEntriesByType` 方法可对所有的 `performance` 实体对象 进行过滤，返回特定类型的实体。
 
 `mark` 方法 和 `measure` 方法的结合可打点计时，获取某个函数执行耗时等。
-![图片](https://mmbiz.qpic.cn/mmbiz_jpg/YBFV3Da0NwsKDJJUkJTEwLBWnTCxr1Tr6tn0QShfadJqPoxBEoPfmKohFFVuF846bZVOW4m7k56yYreicuLEfgw/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![图片](https://tva1.sinaimg.cn/large/006tNbRwgy1gah5dbnjlej31nq0u01es.jpg)
 
 - `performance.getEntriesByName()`
 - `performance.getEntriesByType()`
@@ -195,12 +195,12 @@ performance 也提供了多种 API，不同的 API 之间可能会有重叠的�
 用于检测性能的事件，这个 API 利用了观察者模式。
 
 获取资源信息
-![图片](https://mmbiz.qpic.cn/mmbiz_jpg/YBFV3Da0NwsKDJJUkJTEwLBWnTCxr1Trz8sJEQWrqInWYUZnMOdiaxD4iaZSictdQD2tibkYn9gSBXQaH2gDcIAN4A/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![图片](https://tva1.sinaimg.cn/large/006tNbRwgy1gah5dyhhrtj31g40liq6s.jpg)
 监测 TTI
-![图片](https://mmbiz.qpic.cn/mmbiz_jpg/YBFV3Da0NwsKDJJUkJTEwLBWnTCxr1TrQOAcXKwAZI5KA1nagN80rpL6iciaejh67ykc1iaUNv5jZxoh2V6iaPI9dg/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![图片](https://tva1.sinaimg.cn/large/006tNbRwgy1gah5e76hzhj30yq0bsgna.jpg)
 
 监测 长任务
-![图片](https://mmbiz.qpic.cn/mmbiz_jpg/YBFV3Da0NwsKDJJUkJTEwLBWnTCxr1TroFeEAIu5kib0xc2zFiaI6GyjSD3GiaNaefnCNGXAVCEqnuiaw34aJ2rk6A/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![图片](https://tva1.sinaimg.cn/large/006tNbRwgy1gah5f4cbcsj30uo0dk76r.jpg)
 
 #### 2. Navigation Timing API
 
@@ -209,8 +209,8 @@ https://www.w3.org/TR/navigation-timing-2/
 ```js
 performance.getEntriesByType("navigation");
 ```
-![图片](https://mmbiz.qpic.cn/mmbiz_jpg/YBFV3Da0NwsKDJJUkJTEwLBWnTCxr1TrPSpYEZoU0gX4ovh7EgjbWUtkN3ESCNJeXZIODo78MjFdkFf7KttosQ/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
-![图片](https://mmbiz.qpic.cn/mmbiz_jpg/YBFV3Da0NwsKDJJUkJTEwLBWnTCxr1Tr9ib07DzQB2uHZZomCCQ9TRNPZbB0ePdPzCPgRtbtn1ChcoaZBmX5RqQ/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![图片](https://tva1.sinaimg.cn/large/006tNbRwgy1gah5foxbyej30u011ath3.jpg)
+![图片](https://tva1.sinaimg.cn/large/006tNbRwgy1gah5g41v1jj318o0dugnt.jpg)
 
 
 不同阶段之间是连续的吗? —— 不连续
@@ -238,8 +238,8 @@ https://w3c.github.io/resource-timing/
 ```js 
 performance.getEntriesByType("resource");
 ```
-![图片](https://mmbiz.qpic.cn/mmbiz_jpg/YBFV3Da0NwsKDJJUkJTEwLBWnTCxr1Tr1otMUzWDag5sJ8vUqmLCvhk52SBlK5fPqJxyqhKrGxzH9Fn1tbLB4Q/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
-![图片](https://mmbiz.qpic.cn/mmbiz_jpg/YBFV3Da0NwsKDJJUkJTEwLBWnTCxr1TrUl2qwj3hhSx1oQoia3zx8L5RPux4Q0ZvDoE2HRW4Bn69Cueibk9guicvQ/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![图片](https://tva1.sinaimg.cn/large/006tNbRwgy1gah5gxga20j31as0u01kx.jpg)
+![图片](https://tva1.sinaimg.cn/large/006tNbRwgy1gah5h63g05j31c60le0w9.jpg)
 ```js
 // 某类资源的加载时间，可测量图片、js、css、XHR
 resourceListEntries.forEach(resource => {
@@ -255,7 +255,7 @@ resourceListEntries.forEach(resource => {
 https://w3c.github.io/paint-timing/
 
 首屏渲染时间(FP)、首次有内容渲染时间(FCP)
-![图片](https://mmbiz.qpic.cn/mmbiz_jpg/YBFV3Da0NwsKDJJUkJTEwLBWnTCxr1TrfIwkUE0La98py7f9TicrTVzaeaCee1C0I6GkGicSBOAv76BSs0oPj6Yw/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![图片](https://tva1.sinaimg.cn/large/006tNbRwgy1gah5inwonkj30rq0g4acu.jpg)
 
 #### 5. User Timing API
 https://www.w3.org/TR/user-timing-2/#introduction
