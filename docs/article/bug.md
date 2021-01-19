@@ -16,7 +16,7 @@ web 的性能一定程度上影响了用户留存率，Google DoubleClick 研究
 
 google 开发者提出了一种 RAIL 模型来衡量应用性能，即：Response、Animation、Idle、Load，分别代表着 web 应用生命周期的四个不同方面。并指出最好的性能指标是：100ms 内响应用户输入；动画或者滚动需在 10ms 内产生下一帧；最大化空闲时间；页面加载时长不超过 5 秒。
 
-![图片](https://mmbiz.qpic.cn/mmbiz_jpg/YBFV3Da0NwsKDJJUkJTEwLBWnTCxr1TrGibNeGbKfV1v6RXTcEZhO6Wj0dnhvOia57pudLueBFXzViciaV8KDPKRCQ/640?wx_fmt=jpeg&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![图片](https://tva1.sinaimg.cn/large/006tNbRwgy1gah4zxc779j314w0u07bg.jpg)
 我们可转化为三个方面来看：响应速度、页面稳定性、外部服务调用
 - 响应速度：页面初始访问速度 + 交互响应速度
 - 页面稳定性：页面出错率
