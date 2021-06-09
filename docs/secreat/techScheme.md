@@ -18,6 +18,9 @@
 
     ![20210521102710](https://i.loli.net/2021/05/21/iNFYrbwsc6KeyTB.png)
 
+- 3.3 结果以及详情页流程
+  
+  ![](https://gitee.com/xiaobai1hao/images/raw/master/files/%5BRN%5DcontactList%E7%BB%93%E6%9E%9C%E8%AF%A6%E6%83%85%E9%A1%B5.jpg)
 
 ## 四、接口设计
 - 4.1 `contactList` 对象结构
@@ -49,13 +52,18 @@
     ];
     ```
 
+- 4.3 结果以及详情页获取的数据中需新增需要显示新增联系人按钮数据以及`phone/account`、`当前产品类型`等字段方便native端进行添加联系人；从native获取到的数据中`outTradeNo`、`tradeId`、`service_name`可明确获取到
+  - 4.3.1 `outTradeNo`、`tradeId` 用于从be获取数据
+  - 4.3.2 `service_name:"prepaid_pln"` 是否可用于添加联系人时标记产品
+
 
 ## 五、前端监控
 接口监控: `js-bridge`成功率
 
 
 ## 六、遗留问题与风险预估
-获取不到contactList时不影响下单流程
+- 6.1 获取不到contactList时不影响下单流程
+- 6.2 联想输入框不影响原有逻辑
 
 
 ## 七、部署方案与环境要求
