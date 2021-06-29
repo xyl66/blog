@@ -64,6 +64,8 @@
 ## 六、遗留问题与风险预估
 - 6.1 获取不到contactList时不影响下单流程
 - 6.2 联想输入框不影响原有逻辑
+- 6.3 transactioService 服务修改
+  - `getPaymentResult`、`getTransactionDetail`暴露`carrier_id`
 
 
 ## 七、部署方案与环境要求
