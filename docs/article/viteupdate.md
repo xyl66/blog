@@ -181,6 +181,7 @@
 <font color='orange'>
 由于我们使用zanproxy代理的原因，需修改vite源码，移除监听端口
 </font>
+
 4.`ts报错类型“ImportMeta”上不存在属性“env”。`
 <font color='orange'>
 ts配置添加 types": ["vite/client"]
@@ -208,14 +209,16 @@ Object.defineProperty(exports, "__esModule", {
 
 ### 注意事项
 1、首次安装依赖最好使用`npm install` ，使用`yarn` 安装时需要运行`yarn yarn-repair`
+
 2、环境变量`(process.env.REGION)`的问题，不要直接使用,特别是不要使用解构`const { APP_REGION = 'vn' } = process.env;`, 由原来的`process.env.REGION`统一变为由
 ```js
   import { APP_REGION,APP_ENV } from '@/utils'
 ```
-
 导入使用。
+
 3、不要使用`require`。图片使用`import`导入
 ```js
 import detailIcon from '@/assets/images/detail.png';
 ```
+
 4、ant字体库不要从lib中引入，避免出现打包后冲突 `'@ant-design/icons/lib'` 更改为 `'@ant-design/icons'`
