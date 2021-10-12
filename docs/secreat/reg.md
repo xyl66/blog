@@ -3,7 +3,7 @@
 `Pulsa` > `Topup`
 `Paket Data` > `DataRoaming`
 `PASCA BAYAR` > `PhoneBill`
-- `phone Number` 以下列数据`mapping`开头长度大于`8`小于`13`数字
+- `phone Number` 以下列数据`mapping`开头长度大于等于`8`小于等于`13`数字
   ```js
   const carriorTH = [
   {
