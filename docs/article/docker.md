@@ -16,6 +16,7 @@
 - 启动nginx服务
 
 ```js
+# build stage
 FROM harbor.shopeemobile.com/mss/node:12.14.0-alpine as builder
 
 COPY . .
@@ -29,6 +30,7 @@ ENV APP_REGION $region
 
 RUN npm run build
 
+# production stage
 FROM harbor.shopeemobile.com/mss/nginx
 
 COPY --from=builder build/ /usr/share/nginx/html/
@@ -48,3 +50,65 @@ Docker build -t vite:v2 --build-arg env=test  --build-arg region=th --build-arg 
 docker run --name vite-test -p 3000:80 vite:v2
 ```
 这时就可以访问本地3000端口看到效果了
+
+## 通用的前端dockerfile
+```js
+# build stage
+FROM node:lts-alpine as build-stage
+
+WORKDIR /app
+
+COPY package.json ./
+
+RUN npm install
+
+COPY . .
+
+RUN npm run build
+
+# production stage
+FROM nginx:stable-perl as production-stage
+
+COPY --from=build-stage /app/dist /usr/share/nginx/html
+
+COPY --from=build-stage /app/default.conf /etc/nginx/conf.d/default.conf
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
+```
+
+## docker build
+docker build命令用于从Dockerfile构建镜像。
+
+典型用法
+```sh
+docker build  -t ImageName:TagName dir
+```
+
+**选项**
+
+- -t 给镜像加一个Tag
+- ImageName 给镜像起的名称
+- TagName 给镜像的Tag名
+- Dir Dockerfile所在目录
+
+
+## 其它
+部署脚本
+```js
+#!/bin/bash
+if [[ ! -d drip_circle ]];then
+  git clone https://github.git drip_circle
+fi
+  pushd drip_circle
+    git pull
+    cp ./deploy/dockerfile .
+    container=$(docker ps -a|grep drip-circle:v1.0.2|awk '{print $1}')
+    if [ $container != '' ];then
+      docker rm -f $container
+      docker rmi drip-circle:v1.0.2
+    fi
+    docker build -t drip-circle:v1.0.2 . && docker run --name dirp-circle-container -d -p 3001:80 drip-circle:v1.0.2
+  popd
+```
