@@ -60,7 +60,9 @@ WORKDIR /app
 
 COPY package.json ./
 
-RUN npm install
+RUN apt-get install libtool automake autoconf && npm install pnpm -g
+
+RUN pnpm install --registry https://registry.npmmirror.com/
 
 COPY . .
 
