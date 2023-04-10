@@ -23,6 +23,6 @@ git commit -m 'deploy'
 #git push -f git@github.com:xyl66/blog.git master:gh-pages
 
 # 如果使用 travis 持续集成
-git push -f https://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@github.com/xyl66/blog.git main:gh-pages
+git push -f https://github.com/xyl66/blog.git main:gh-pages
 
 cd -
