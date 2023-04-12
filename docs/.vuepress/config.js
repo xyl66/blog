@@ -8,7 +8,7 @@ function getMDFiles(jsonPath) {
   function findJsonFile(path, dir) {
     let files = fs.readdirSync(path);
     console.log(files);
-    files.forEach(function (item, index) {
+    files.forEach(function(item, index) {
       let fPath = join(path, item);
       let stat = fs.statSync(fPath);
       if (stat.isDirectory() === true && item !== ".vuepress") {
@@ -51,7 +51,8 @@ module.exports = {
       { text: "首页", link: "/" },
       { text: "随笔", link: "/article/" },
       { text: "记录", link: "/studys/" },
-      { text: "面试", link: "/work/" },
+      { text: "面试", link: "/interface/" },
+      { text: "杂记", link: "/work/" },
       { text: "CSDN", link: "https://blog.csdn.net/a8725585" },
     ],
   },
