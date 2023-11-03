@@ -163,5 +163,127 @@ Turbo 支持通过 有--profile标志 生成构建配置文件，你可以将它
 Turbo 官方指出支持使用 Lerna 管理包、发布和更改日志生成，同时使用 Turbo 进行任务运行和缓存。
 
 ---
+layout: two-cols
+title: Turbo实战
+level: 2
+---
+原始结构
+```ts
+.
+├── build
+│   ├── config
+│   ├── generate
+│   ├── script
+│   └── vite
+├── deploy
+├── public
+│   └── resource
+├── src
+│   ├── api
+│   ├── assets
+│   ├── components
+│   ├── design
+│   ├── directives
+│   ├── enums
+│   ├── hooks
+│   ├── utils
+│   └── views
+└── types
+    └── obboarding
+```
+
+::right::
+新结构
+```ts
+.
+├── apps
+│   ├── member-portal
+│   └── mterminal-portal
+├── configs
+│   ├── css-preprocess
+│   ├── lint
+│   ├── tsconfig
+│   └── vite
+├── deploy
+├── packages
+│   ├── assets
+│   ├── business
+│   ├── components
+│   ├── constants
+│   ├── hooks
+│   ├── locale
+│   ├── styles
+│   ├── types
+│   └── utils
+└── scripts
+    └── src
+```
+
+---
+
+本地开发
+<div class="flex justify-between" >
+<img src="/img/dev-option.png" alt="" srcset="" class="w-90">
+<img src="/img/dev-ready.png" alt="" srcset="" class="w-90">
+</div>
+
+线上发布
+<div class="flex justify-between" >
+<img src="/img/pro-mt.png" alt="" srcset="" class="w-90">
+<img src="/img/pro-member.png" alt="" srcset="" class="w-90">
+</div>
+---
+
+# 微前端
+微前端是一种架构风格，旨在当一个项目需要由多个小而散的微应用组合时，这些微应用可以独立开发、测试和部署，最终聚合成一个产品进行交付。
+<div class="flex justify-between">
+<div>
+
+  - 独立开发部署
+  - 增量升级
+  - 兼容多技术栈
+  - 跨应用导入
+  - 应用间的通信
+  - 共享依赖
+</div>
+<img src="/img/example.gif" alt="" srcset="" class="w-120">
+</div>
+  
+---
+
+# Why Not Iframe
+为什么不用 iframe，这几乎是所有微前端方案第一个会被 challenge 的问题。但是大部分微前端方案又不约而同放弃了 iframe 方案，自然是有原因的，并不是为了 "炫技" 或者刻意追求 "特立独行"。
+
+如果不考虑体验问题，iframe 几乎是最完美的微前端解决方案了。
+
+iframe 最大的特性就是提供了浏览器原生的硬隔离方案，不论是样式隔离、js 隔离这类问题统统都能被完美解决。但他的最大问题也在于他的隔离性无法被突破，导致应用间上下文无法被共享，随之带来的开发体验、产品体验的问题。
+
+1. url 不同步。浏览器刷新 iframe url 状态丢失、后退前进按钮无法使用。
+2. UI 不同步，DOM 结构不共享。想象一下屏幕右下角 1/4 的 iframe 里来一个带遮罩层的弹框，同时我们要求这个弹框要浏览器居中显示，还要浏览器 resize 时自动居中..
+3. 全局上下文完全隔离，内存变量不共享。iframe 内外系统的通信、数据同步等需求，主应用的 cookie 要透传到根域名都不同的子应用中实现免登效果。
+4. 慢。每次子应用进入都是一次浏览器上下文重建、资源重新加载的过程。
+---
+
+# Mtermminal微前端实践
+<div class="flex justify-between">
+
+<div>
+<img src="/img/iframe.gif" alt="" srcset="" class="w-100">
+<p class="text-center">iframe</p>
+</div>
+<div>
+<img src="/img/qiankun.gif" alt="" srcset="" class="w-100">
+<p class="text-center">qiankun</p>
+</div>
+</div>
+
+---
+
+<div class="flex justify-between">
+<img src="/img/main.png" alt="" srcset="" class="w-100">
+<img src="/img/child.png" alt="" srcset="" class="w-100">
+</div>
+
+---
 
 Thank you!
