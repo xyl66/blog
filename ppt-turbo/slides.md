@@ -35,7 +35,7 @@ hideInToc: true
 
 ---
 
-# Monorepo
+# Monorepo介绍
 在版本控制系统中，Monorepo（“mono”意为“单一”，“repo”是“存储库”的缩写）是一种软件开发策略，其中多个专案的程式码存储在同一个存储库里面。
 
 在 Monorepo 项目中你可以同时管理多个逻辑共存的应用程序，比如桌面应用程序和 Web 应用程序，甚至 Ios 应用也可以保存在 Monorepo 中，只要你愿意的话。
@@ -115,7 +115,7 @@ TurboRepo 支持多个任务的并行处理，完美了的解决了 Lerna 构建
 ---
 
 # Turborepo运行任务
-Turborepo可以通过了解任务之间的依赖关系来安排我们的任务以获得最大速度。
+Turborepo可以通过了解任务之间的依赖关系来安排我们的任务并行运行以获得最大速度。
 ```sh
 - yarn workspaces run lint
 - yarn workspaces run test
@@ -128,23 +128,40 @@ Turborepo可以通过了解任务之间的依赖关系来安排我们的任务�
 
 ---
 
+# 通过内容生成 Hash 甄别文件变动
+<div class="flex justify-between" >
+ <section class="w-100">Turborepo 检查文件内容变动时，会根据内容生成 Hash 来对比，而不是粗略的利用时间戳来确定需要构建的内容。</section>
+<section>
+  <img src="/img/cache-miss.webp" alt="" srcset="" class="w-90">
+  <img src="/img/cache-hit.webp" alt="" srcset="" class="w-90">
+</section>
+</div>
+
+<!--
+Turborepo可以缓存任务的结果和日志。
+第一次运行完成后，Turborepo 会将所有指定的输出（包括文件和日志）保存到新的缓存工件中，由哈希寻址。
+第二次运行时
+1.哈希将是相同的，因为输入没有改变（例如） 78awdk123
+2.Turborepo 将找到具有匹配哈希的缓存工件
+3.重播输出 - 将保存的日志打印到并将保存的输出文件还原到 stdout 文件系统中的相应位置。
+-->
+
+---
+
+# 云缓存
+通常针对于构建时产生的缓存文件大部分时都会记录在本地硬盘中，在多人合作或者 Docker 构建中这也就意味着仍然需要首次巨大的耗时，构建生成缓存后才会提升效率。
+  <img src="/img/local-caching.webp" alt="" srcset="" class="w-85">
+
+但 TurboRepo 开发团队提供了一项名为“云缓存”的功能，它支持将本地 turborepo 链接到远程缓存从而实现多人合作时共享缓存。
+  <img src="/img/remote-caching.webp" alt="" srcset="" class="w-85">
+
+---
+
 # TurboRepo优点
 
 ## 更快的增量构建
 
 TurboRepo 的基本原则是从不重新计算以前完成的工作, Turborepo 会记住你构建的内容并跳过已经计算过的内容，在多次构建开发时，这也就意味更少的构建耗时。
-
-## 通过内容生成 Hash 甄别文件变动
-
-Turborepo 检查文件内容变动时，会根据内容生成 Hash 来对比，而不是粗略的利用时间戳来确定需要构建的内容。
-
-## 云缓存
-
-通常针对于构建时产生的缓存文件大部分时都会记录在本地硬盘中，在多人合作或者 Docker 构建中这也就意味着仍然需要首次巨大的耗时构建生成缓存才会提升效率。
-
-但 TurboRepo 开发团队提供了一项名为“云缓存”的功能，它支持将本地 turborepo 链接到远程缓存从而实现多人合作时共享缓存。
-
----
 
 ## 任务管道
 
@@ -158,15 +175,12 @@ Turborepo 通过约定降低复杂性，使用 Turborepo 我们仅仅关心简�
 
 Turbo 支持通过 有--profile标志 生成构建配置文件，你可以将它并将其导入 Chrome 或 Edge 以了解哪些任务花费的时间最长。
 
-## 新功能
-
-Turbo 官方指出支持使用 Lerna 管理包、发布和更改日志生成，同时使用 Turbo 进行任务运行和缓存。
-
 ---
 layout: two-cols
 title: Turbo实战
 level: 2
 ---
+
 原始结构
 ```ts
 .
@@ -219,6 +233,13 @@ level: 2
     └── src
 ```
 
+<!--
+我们现有项目中的实际应用。
+之前我们的原有项目结构都是左侧形式，一个项目就是一个仓库。
+现在调整为新monorepo后，不同的项目都放在apps中。
+他们共享的组件，逻辑等都可以放在packages中
+-->
+
 ---
 
 本地开发
@@ -229,9 +250,17 @@ level: 2
 
 线上发布
 <div class="flex justify-between" >
-<img src="/img/pro-mt.png" alt="" srcset="" class="w-90">
-<img src="/img/pro-member.png" alt="" srcset="" class="w-90">
+<img src="/img/pro-member.png" alt="member-portal" title="member-portal" srcset="" class="w-90">
+<img src="/img/pro-mt.png" alt="mt-portal" srcset="" class="w-90">
 </div>
+
+<!--
+本地开发时选取要运行项目，由于我们采用的是vite，所以本地开发启动的速度也是很快的。
+线上发布时可以看到左边有两个build只花了13s就完成了。
+这是因为我们右边的是mt的任务，左边的是会员的任务，这两个只花费13s build的任务只有mt中有代码变动，
+因为是一个仓库，代码合并后会同时触发两个项目的ci，由于会员相关代码没变动因此build时就使用了缓存
+-->
+
 ---
 
 # 微前端
