@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>基于 CDN 的多版本静态文件管理方案 | 小小强的博客</title>
+    <meta name="generator" content="VuePress 1.9.10">
+    <link rel="icon" href="/blog/favicon.ico">
+    <meta name="description" content="没事就瞅瞅">
+    
+    <link rel="preload" href="/blog/assets/css/0.styles.46b871ae.css" as="style"><link rel="preload" href="/blog/assets/js/app.4446cea9.js" as="script"><link rel="preload" href="/blog/assets/js/2.272a5ce0.js" as="script"><link rel="preload" href="/blog/assets/js/1.4a558552.js" as="script"><link rel="preload" href="/blog/assets/js/56.c47fb2a7.js" as="script"><link rel="prefetch" href="/blog/assets/js/10.01224c67.js"><link rel="prefetch" href="/blog/assets/js/11.11c89185.js"><link rel="prefetch" href="/blog/assets/js/12.740beb55.js"><link rel="prefetch" href="/blog/assets/js/13.e2dced25.js"><link rel="prefetch" href="/blog/assets/js/14.6b64a69d.js"><link rel="prefetch" href="/blog/assets/js/15.25a9f6f1.js"><link rel="prefetch" href="/blog/assets/js/16.cbd0394f.js"><link rel="prefetch" href="/blog/assets/js/17.e87875c8.js"><link rel="prefetch" href="/blog/assets/js/18.1198418d.js"><link rel="prefetch" href="/blog/assets/js/19.e962f7b3.js"><link rel="prefetch" href="/blog/assets/js/20.8fe06d2d.js"><link rel="prefetch" href="/blog/assets/js/21.2298a5e7.js"><link rel="prefetch" href="/blog/assets/js/22.60dbf317.js"><link rel="prefetch" href="/blog/assets/js/23.ab4437c4.js"><link rel="prefetch" href="/blog/assets/js/24.07e93eba.js"><link rel="prefetch" href="/blog/assets/js/25.ef49cc96.js"><link rel="prefetch" href="/blog/assets/js/26.6c4e63a6.js"><link rel="prefetch" href="/blog/assets/js/27.2e9ded17.js"><link rel="prefetch" href="/blog/assets/js/28.8868833f.js"><link rel="prefetch" href="/blog/assets/js/29.3cf74d45.js"><link rel="prefetch" href="/blog/assets/js/3.e1ab5967.js"><link rel="prefetch" href="/blog/assets/js/30.4de85e2e.js"><link rel="prefetch" href="/blog/assets/js/31.c4a28ec7.js"><link rel="prefetch" href="/blog/assets/js/32.7cea01bb.js"><link rel="prefetch" href="/blog/assets/js/33.2647cd6d.js"><link rel="prefetch" href="/blog/assets/js/34.50ed5054.js"><link rel="prefetch" href="/blog/assets/js/35.4c34f3d3.js"><link rel="prefetch" href="/blog/assets/js/36.343511ba.js"><link rel="prefetch" href="/blog/assets/js/37.ec4b26f6.js"><link rel="prefetch" href="/blog/assets/js/38.d54ec2f2.js"><link rel="prefetch" href="/blog/assets/js/39.1aac837b.js"><link rel="prefetch" href="/blog/assets/js/4.c2c7c567.js"><link rel="prefetch" href="/blog/assets/js/40.12d41620.js"><link rel="prefetch" href="/blog/assets/js/41.5563a4eb.js"><link rel="prefetch" href="/blog/assets/js/42.35a59e16.js"><link rel="prefetch" href="/blog/assets/js/43.66dde9e0.js"><link rel="prefetch" href="/blog/assets/js/44.81fcc42b.js"><link rel="prefetch" href="/blog/assets/js/45.460cbc53.js"><link rel="prefetch" href="/blog/assets/js/46.2d51ae00.js"><link rel="prefetch" href="/blog/assets/js/47.195b3a49.js"><link rel="prefetch" href="/blog/assets/js/48.aeac0187.js"><link rel="prefetch" href="/blog/assets/js/49.8f8d32c8.js"><link rel="prefetch" href="/blog/assets/js/5.a77448b6.js"><link rel="prefetch" href="/blog/assets/js/50.baa0563a.js"><link rel="prefetch" href="/blog/assets/js/51.39c7c336.js"><link rel="prefetch" href="/blog/assets/js/52.e5217aaa.js"><link rel="prefetch" href="/blog/assets/js/53.55b21add.js"><link rel="prefetch" href="/blog/assets/js/54.742be447.js"><link rel="prefetch" href="/blog/assets/js/55.b3643566.js"><link rel="prefetch" href="/blog/assets/js/57.3ec46410.js"><link rel="prefetch" href="/blog/assets/js/58.16dd895c.js"><link rel="prefetch" href="/blog/assets/js/59.a6ab6560.js"><link rel="prefetch" href="/blog/assets/js/6.1577d73e.js"><link rel="prefetch" href="/blog/assets/js/60.a16c8f77.js"><link rel="prefetch" href="/blog/assets/js/7.9e66851b.js"><link rel="prefetch" href="/blog/assets/js/vendors~docsearch.1f6d7e80.js">
+    <link rel="stylesheet" href="/blog/assets/css/0.styles.46b871ae.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/blog/" class="home-link router-link-active"><!----> <span class="site-name">小小强的博客</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/blog/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/blog/article/" class="nav-link">
+  随笔
+</a></div><div class="nav-item"><a href="/blog/studys/" class="nav-link">
+  记录
+</a></div><div class="nav-item"><a href="/blog/interface/" class="nav-link">
+  面试
+</a></div><div class="nav-item"><a href="/blog/work/" class="nav-link router-link-active">
+  杂记
+</a></div><div class="nav-item"><a href="https://blog.csdn.net/a8725585" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  CSDN
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/blog/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/blog/article/" class="nav-link">
+  随笔
+</a></div><div class="nav-item"><a href="/blog/studys/" class="nav-link">
+  记录
+</a></div><div class="nav-item"><a href="/blog/interface/" class="nav-link">
+  面试
+</a></div><div class="nav-item"><a href="/blog/work/" class="nav-link router-link-active">
+  杂记
+</a></div><div class="nav-item"><a href="https://blog.csdn.net/a8725585" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  CSDN
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav>  <ul class="sidebar-links"><li><a href="/blog/work/CDN_VERSION_MANAGEMENT.html" aria-current="page" class="active sidebar-link">基于 CDN 的多版本静态文件管理方案</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blog/work/CDN_VERSION_MANAGEMENT.html#📋-方案概述" class="sidebar-link">📋 方案概述</a></li><li class="sidebar-sub-header"><a href="/blog/work/CDN_VERSION_MANAGEMENT.html#🎯-核心机制" class="sidebar-link">🎯 核心机制</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blog/work/CDN_VERSION_MANAGEMENT.html#_1-为什么需要版本目录" class="sidebar-link">1. 为什么需要版本目录？</a></li><li class="sidebar-sub-header"><a href="/blog/work/CDN_VERSION_MANAGEMENT.html#_2-版本路径策略" class="sidebar-link">2. 版本路径策略</a></li><li class="sidebar-sub-header"><a href="/blog/work/CDN_VERSION_MANAGEMENT.html#_3-版本号生成规则" class="sidebar-link">3. 版本号生成规则</a></li><li class="sidebar-sub-header"><a href="/blog/work/CDN_VERSION_MANAGEMENT.html#_4-访问路径" class="sidebar-link">4. 访问路径</a></li></ul></li><li class="sidebar-sub-header"><a href="/blog/work/CDN_VERSION_MANAGEMENT.html#🎓-真实案例-为什么版本目录如此重要" class="sidebar-link">🎓 真实案例：为什么版本目录如此重要</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blog/work/CDN_VERSION_MANAGEMENT.html#案例-1-用户正在填写贷款申请表单" class="sidebar-link">案例 1: 用户正在填写贷款申请表单</a></li><li class="sidebar-sub-header"><a href="/blog/work/CDN_VERSION_MANAGEMENT.html#案例-2-高峰期发布导致大量用户报错" class="sidebar-link">案例 2: 高峰期发布导致大量用户报错</a></li><li class="sidebar-sub-header"><a href="/blog/work/CDN_VERSION_MANAGEMENT.html#案例-3-依赖链断裂导致级联失败" class="sidebar-link">案例 3: 依赖链断裂导致级联失败</a></li></ul></li><li class="sidebar-sub-header"><a href="/blog/work/CDN_VERSION_MANAGEMENT.html#🏗️-技术实施方案" class="sidebar-link">🏗️ 技术实施方案</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blog/work/CDN_VERSION_MANAGEMENT.html#步骤-1-修改-vue-构建配置" class="sidebar-link">步骤 1: 修改 Vue 构建配置</a></li><li class="sidebar-sub-header"><a href="/blog/work/CDN_VERSION_MANAGEMENT.html#步骤-2-环境变量配置" class="sidebar-link">步骤 2: 环境变量配置</a></li><li class="sidebar-sub-header"><a href="/blog/work/CDN_VERSION_MANAGEMENT.html#步骤-3-修改-index-html" class="sidebar-link">步骤 3: 修改 index.html</a></li><li class="sidebar-sub-header"><a href="/blog/work/CDN_VERSION_MANAGEMENT.html#步骤-4-jenkins-pipeline-修改" class="sidebar-link">步骤 4: Jenkins Pipeline 修改</a></li><li class="sidebar-sub-header"><a href="/blog/work/CDN_VERSION_MANAGEMENT.html#步骤-5-nginx-配置-入口服务器" class="sidebar-link">步骤 5: Nginx 配置（入口服务器）</a></li><li class="sidebar-sub-header"><a href="/blog/work/CDN_VERSION_MANAGEMENT.html#步骤-6-cdn-缓存策略配置" class="sidebar-link">步骤 6: CDN 缓存策略配置</a></li></ul></li><li class="sidebar-sub-header"><a href="/blog/work/CDN_VERSION_MANAGEMENT.html#📊-方案优势分析" class="sidebar-link">📊 方案优势分析</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blog/work/CDN_VERSION_MANAGEMENT.html#✅-核心优势" class="sidebar-link">✅ 核心优势</a></li><li class="sidebar-sub-header"><a href="/blog/work/CDN_VERSION_MANAGEMENT.html#📈-性能提升预估" class="sidebar-link">📈 性能提升预估</a></li></ul></li><li class="sidebar-sub-header"><a href="/blog/work/CDN_VERSION_MANAGEMENT.html#💰-成本分析" class="sidebar-link">💰 成本分析</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blog/work/CDN_VERSION_MANAGEMENT.html#阿里云-cdn-费用预估-墨西哥用户为主" class="sidebar-link">阿里云 CDN 费用预估（墨西哥用户为主）</a></li><li class="sidebar-sub-header"><a href="/blog/work/CDN_VERSION_MANAGEMENT.html#成本优化建议" class="sidebar-link">成本优化建议</a></li></ul></li><li class="sidebar-sub-header"><a href="/blog/work/CDN_VERSION_MANAGEMENT.html#🚀-部署流程" class="sidebar-link">🚀 部署流程</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blog/work/CDN_VERSION_MANAGEMENT.html#首次部署-生产环境" class="sidebar-link">首次部署（生产环境）</a></li><li class="sidebar-sub-header"><a href="/blog/work/CDN_VERSION_MANAGEMENT.html#日常发布流程" class="sidebar-link">日常发布流程</a></li></ul></li><li class="sidebar-sub-header"><a href="/blog/work/CDN_VERSION_MANAGEMENT.html#🔧-运维管理" class="sidebar-link">🔧 运维管理</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blog/work/CDN_VERSION_MANAGEMENT.html#监控指标" class="sidebar-link">监控指标</a></li><li class="sidebar-sub-header"><a href="/blog/work/CDN_VERSION_MANAGEMENT.html#手动清理旧版本" class="sidebar-link">手动清理旧版本</a></li><li class="sidebar-sub-header"><a href="/blog/work/CDN_VERSION_MANAGEMENT.html#快速回滚" class="sidebar-link">快速回滚</a></li></ul></li><li class="sidebar-sub-header"><a href="/blog/work/CDN_VERSION_MANAGEMENT.html#🔍-故障排查" class="sidebar-link">🔍 故障排查</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blog/work/CDN_VERSION_MANAGEMENT.html#问题-1-用户报告加载失败" class="sidebar-link">问题 1: 用户报告加载失败</a></li><li class="sidebar-sub-header"><a href="/blog/work/CDN_VERSION_MANAGEMENT.html#问题-2-cdn-成本异常增加" class="sidebar-link">问题 2: CDN 成本异常增加</a></li><li class="sidebar-sub-header"><a href="/blog/work/CDN_VERSION_MANAGEMENT.html#问题-3-新版本发布后用户仍看到旧版本" class="sidebar-link">问题 3: 新版本发布后用户仍看到旧版本</a></li></ul></li><li class="sidebar-sub-header"><a href="/blog/work/CDN_VERSION_MANAGEMENT.html#🚀-增强方案" class="sidebar-link">🚀 增强方案</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blog/work/CDN_VERSION_MANAGEMENT.html#方案-a-前端版本检测-自动刷新" class="sidebar-link">方案 A: 前端版本检测 + 自动刷新</a></li><li class="sidebar-sub-header"><a href="/blog/work/CDN_VERSION_MANAGEMENT.html#方案-b-service-worker-离线缓存" class="sidebar-link">方案 B: Service Worker 离线缓存</a></li><li class="sidebar-sub-header"><a href="/blog/work/CDN_VERSION_MANAGEMENT.html#方案-c-灰度发布-金丝雀部署" class="sidebar-link">方案 C: 灰度发布（金丝雀部署）</a></li></ul></li><li class="sidebar-sub-header"><a href="/blog/work/CDN_VERSION_MANAGEMENT.html#📚-参考资料" class="sidebar-link">📚 参考资料</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blog/work/CDN_VERSION_MANAGEMENT.html#官方文档" class="sidebar-link">官方文档</a></li><li class="sidebar-sub-header"><a href="/blog/work/CDN_VERSION_MANAGEMENT.html#最佳实践" class="sidebar-link">最佳实践</a></li><li class="sidebar-sub-header"><a href="/blog/work/CDN_VERSION_MANAGEMENT.html#工具推荐" class="sidebar-link">工具推荐</a></li></ul></li><li class="sidebar-sub-header"><a href="/blog/work/CDN_VERSION_MANAGEMENT.html#📝-总结" class="sidebar-link">📝 总结</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/blog/work/CDN_VERSION_MANAGEMENT.html#✅-方案优势总结" class="sidebar-link">✅ 方案优势总结</a></li><li class="sidebar-sub-header"><a href="/blog/work/CDN_VERSION_MANAGEMENT.html#🎯-与-k8s-pvc-方案对比" class="sidebar-link">🎯 与 K8s PVC 方案对比</a></li><li class="sidebar-sub-header"><a href="/blog/work/CDN_VERSION_MANAGEMENT.html#🚀-推荐实施路线" class="sidebar-link">🚀 推荐实施路线</a></li></ul></li><li class="sidebar-sub-header"><a href="/blog/work/CDN_VERSION_MANAGEMENT.html#🎉-开始实施" class="sidebar-link">🎉 开始实施</a></li></ul></li><li><a href="/blog/work/gitversion.html" class="sidebar-link">分支管理</a></li><li><a href="/blog/work/guid.html" class="sidebar-link">Airbnb JavaScript Style Guide()</a></li><li><a href="/blog/work/tech.html" class="sidebar-link">大前端技术</a></li><li><a href="/blog/work/turbo.html" class="sidebar-link">TurboRepo</a></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="基于-cdn-的多版本静态文件管理方案"><a href="#基于-cdn-的多版本静态文件管理方案" class="header-anchor">#</a> 基于 CDN 的多版本静态文件管理方案</h1> <h2 id="📋-方案概述"><a href="#📋-方案概述" class="header-anchor">#</a> 📋 方案概述</h2> <p>通过 <strong>CDN 多版本路径</strong> 实现静态资源的版本管理，每次发布上传到独立的版本目录，利用 CDN 的缓存和分发能力，确保新旧版本共存且性能最优。</p> <hr> <h2 id="🎯-核心机制"><a href="#🎯-核心机制" class="header-anchor">#</a> 🎯 核心机制</h2> <h3 id="_1-为什么需要版本目录"><a href="#_1-为什么需要版本目录" class="header-anchor">#</a> 1. 为什么需要版本目录？</h3> <h4 id="❓-核心问题"><a href="#❓-核心问题" class="header-anchor">#</a> ❓ 核心问题</h4> <p><strong>即使文件名已经带了 hash（如 <code>app.abc12345.js</code>），为什么还需要版本目录？</strong></p> <h4 id="🔴-方案-a-不使用版本目录-会出问题"><a href="#🔴-方案-a-不使用版本目录-会出问题" class="header-anchor">#</a> 🔴 方案 A: 不使用版本目录（会出问题）</h4> <div class="language- line-numbers-mode"><pre class="language-text"><code>CDN 结构（所有版本文件混在一起）:
+├── static/
+│   ├── js/app.abc12345.js      ← 旧版本文件
+│   ├── js/app.xyz99999.js      ← 新版本文件
+│   ├── js/chunk-home.old111.js ← 旧版本 chunk
+│   ├── js/chunk-home.new222.js ← 新版本 chunk
+│   └── css/...
+└── index.html ← ⚠️ 只有一个，发布时会被覆盖！
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br></div></div><p><strong>问题场景：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>10:00 - 用户 A 访问网站
+        → 加载 index.html (旧版本)
+        → 浏览器缓存了旧版 index.html
+        → index.html 引用: app.abc12345.js, chunk-home.old111.js
+
+10:05 - 运维发布新版本
+        → index.html 被新版本覆盖 ⚠️
+        → 新版 index.html 引用: app.xyz99999.js, chunk-home.new222.js
+
+10:10 - 用户 A 点击页面跳转（路由懒加载）
+        → 浏览器缓存的旧版 app.abc12345.js 尝试加载
+        → 请求: chunk-about.old333.js
+        → ❌ 404 Not Found（可能已被清理或依赖链断裂）
+        → 用户看到: &quot;Loading chunk failed&quot; 错误
+        → 🚨 用户流失，业务转化率下降
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br></div></div><p><strong>核心矛盾：</strong></p> <ol><li><strong>index.html 是唯一入口</strong>：只有一个文件，覆盖后旧用户无法找到对应资源引用</li> <li><strong>依赖关系复杂</strong>：webpack 打包后文件间有复杂依赖，必须保证完整性</li> <li><strong>懒加载场景</strong>：用户可能在任何时候触发 chunk 加载，文件必须一直存在</li> <li><strong>浏览器缓存</strong>：用户可能缓存了旧版 index.html 或 app.js，但请求的 chunk 已不存在</li></ol> <h4 id="✅-方案-b-使用版本目录-推荐"><a href="#✅-方案-b-使用版本目录-推荐" class="header-anchor">#</a> ✅ 方案 B: 使用版本目录（推荐）</h4> <div class="language- line-numbers-mode"><pre class="language-text"><code>CDN 结构（版本完全隔离）:
+├── v0.1.0-20250115/          ← 旧版本（完整的依赖树）
+│   ├── index.html
+│   ├── static/
+│   │   ├── js/app.abc12345.js
+│   │   ├── js/chunk-vendors.old123.js
+│   │   ├── js/chunk-home.old111.js
+│   │   └── js/chunk-about.old333.js
+│   └── static/css/...
+├── v0.1.0-20250116/          ← 新版本（完整的依赖树）
+│   ├── index.html
+│   ├── static/
+│   │   ├── js/app.xyz99999.js
+│   │   ├── js/chunk-vendors.new456.js
+│   │   ├── js/chunk-home.new222.js
+│   │   └── js/chunk-about.new444.js
+│   └── static/css/...
+└── latest.txt → &quot;v0.1.0-20250116&quot;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br></div></div><p><strong>完美解决：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>10:00 - 用户 A 访问网站
+        → Nginx 重定向: /latest → /v0.1.0-20250115/
+        → 加载: v0.1.0-20250115/index.html
+        → 所有资源都在 v0.1.0-20250115/ 目录下
+
+10:05 - 运维发布新版本
+        → 上传新目录: v0.1.0-20250116/
+        → 更新 latest.txt → &quot;v0.1.0-20250116&quot;
+        → ✅ 旧目录 v0.1.0-20250115/ 完全保留
+
+10:10 - 用户 A 点击页面跳转
+        → 请求: v0.1.0-20250115/static/js/chunk-about.old333.js
+        → ✅ 200 OK（文件仍在旧版本目录中）
+        → 用户正常使用，无感知
+
+同时  - 用户 B 首次访问
+        → Nginx 重定向: /latest → /v0.1.0-20250116/
+        → 加载: v0.1.0-20250116/index.html
+        → ✅ 获取最新版本
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br></div></div><h4 id="📊-方案对比"><a href="#📊-方案对比" class="header-anchor">#</a> 📊 方案对比</h4> <table><thead><tr><th>维度</th> <th>不使用版本目录</th> <th>使用版本目录</th></tr></thead> <tbody><tr><td><strong>index.html 管理</strong></td> <td>❌ 只有 1 个，会被覆盖</td> <td>✅ 每版本独立</td></tr> <tr><td><strong>文件组织</strong></td> <td>❌ 混在一起，难以管理</td> <td>✅ 按版本隔离，清晰明确</td></tr> <tr><td><strong>旧用户访问</strong></td> <td>❌ 可能 404 或依赖链断裂</td> <td>✅ 100% 可用</td></tr> <tr><td><strong>新用户访问</strong></td> <td>✅ 正常</td> <td>✅ 正常</td></tr> <tr><td><strong>回滚速度</strong></td> <td>❌ 需要重新构建部署</td> <td>✅ 修改 latest.txt 即可（&lt; 1分钟）</td></tr> <tr><td><strong>存储占用</strong></td> <td>🟡 较低（但无法安全清理）</td> <td>🟡 较高（可定期清理旧版本）</td></tr> <tr><td><strong>风险等级</strong></td> <td>🔴 高风险（生产事故）</td> <td>🟢 低风险（零停机发布）</td></tr></tbody></table> <h4 id="💡-关键理解"><a href="#💡-关键理解" class="header-anchor">#</a> 💡 关键理解</h4> <p><strong>即使 CDN 不会自动删除旧文件，也必须使用版本目录，因为：</strong></p> <ol><li><p><strong>index.html 是单点故障</strong></p> <ul><li>只有一个版本，被覆盖后旧用户就找不到正确的资源引用</li></ul></li> <li><p><strong>依赖链必须完整</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>index.html → app.js → chunk-vendor.js → chunk-home.js → ...
+↑ 任何一个环节的文件不匹配，整个应用都会崩溃
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div></li> <li><p><strong>浏览器缓存不可控</strong></p> <ul><li>用户可能缓存了旧版 index.html 或 app.js</li> <li>但新版本已经改变了 chunk 的引用关系</li> <li>导致加载失败</li></ul></li> <li><p><strong>版本目录 = 完整快照</strong></p> <ul><li>每个版本目录是一个完整的、自包含的应用快照</li> <li>保证了旧用户和新用户都能正常访问</li></ul></li></ol> <hr> <h3 id="_2-版本路径策略"><a href="#_2-版本路径策略" class="header-anchor">#</a> 2. 版本路径策略</h3> <div class="language- line-numbers-mode"><pre class="language-text"><code>CDN 基础路径: https://cdn.creditumex.com/h5/hw-prestaveloz-h5/
+
+版本目录结构:
+├── v0.1.0-20250115/
+│   ├── static/
+│   │   ├── js/app.[hash].js
+│   │   └── css/app.[hash].css
+│   └── index.html
+├── v0.1.0-20250116/
+│   ├── static/
+│   │   ├── js/app.[hash].js
+│   │   └── css/app.[hash].css
+│   └── index.html
+└── latest -&gt; v0.1.0-20250116/ (软链接或重定向)
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br></div></div><h3 id="_3-版本号生成规则"><a href="#_3-版本号生成规则" class="header-anchor">#</a> 3. 版本号生成规则</h3> <div class="language-javascript line-numbers-mode"><pre class="language-javascript"><code><span class="token comment">// package.json 版本 + 日期</span>
+<span class="token keyword">const</span> <span class="token constant">VERSION</span> <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">v</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>packageJson<span class="token punctuation">.</span>version<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">-</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toISOString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">'T'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span>
+<span class="token comment">// 示例: v0.1.0-20250115</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><h3 id="_4-访问路径"><a href="#_4-访问路径" class="header-anchor">#</a> 4. 访问路径</h3> <div class="language- line-numbers-mode"><pre class="language-text"><code>用户访问入口: https://h5.creditumex.com/
+  ↓
+Nginx 重定向到: https://cdn.creditumex.com/h5/hw-prestaveloz-h5/latest/
+  ↓
+CDN 返回: index.html (Cache-Control: no-cache)
+  ↓
+静态资源: https://cdn.creditumex.com/h5/hw-prestaveloz-h5/v0.1.0-20250115/static/js/app.[hash].js
+  ↓
+CDN 缓存: Cache-Control: public, max-age=31536000 (1年)
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><hr> <h2 id="🎓-真实案例-为什么版本目录如此重要"><a href="#🎓-真实案例-为什么版本目录如此重要" class="header-anchor">#</a> 🎓 真实案例：为什么版本目录如此重要</h2> <h3 id="案例-1-用户正在填写贷款申请表单"><a href="#案例-1-用户正在填写贷款申请表单" class="header-anchor">#</a> 案例 1: 用户正在填写贷款申请表单</h3> <div class="language- line-numbers-mode"><pre class="language-text"><code>场景：用户在填写多步骤贷款申请表单（PrestaVeloz 核心业务流程）
+
+10:00 - 用户 A 开始填写表单
+        ├─ 加载首页（第1步：基本信息）
+        ├─ 下载：index.html, app.abc12345.js
+        └─ 浏览器缓存：index.html 和 app.js
+
+10:05 - 运维发布新版本（修复了一个表单验证 bug）
+        ├─ 上传新文件：app.xyz99999.js, chunk-form.new222.js
+        ├─ ❌ 覆盖 index.html（如果不使用版本目录）
+        └─ 新版 index.html 引用新的 chunk 文件
+
+10:10 - 用户 A 点击&quot;下一步&quot;（第2步：收入信息）
+        ├─ 触发路由懒加载
+        ├─ 旧版 app.abc12345.js 请求：chunk-form.old111.js
+        ├─ ❌ 404 Not Found
+        ├─ 用户看到白屏或错误提示
+        └─ 🚨 结果：
+            - 用户填写的数据可能丢失
+            - 用户体验极差，可能放弃申请
+            - 转化率下降，直接影响业务收入
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br></div></div><p><strong>使用版本目录后：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>10:00 - 用户 A 访问 v0.1.0-20250115/
+10:05 - 上传新版本 v0.1.0-20250116/，旧版本保留
+10:10 - 用户 A 继续使用 v0.1.0-20250115/
+        ✅ 所有资源都在，表单正常提交
+        ✅ 用户无感知，顺利完成申请
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><h3 id="案例-2-高峰期发布导致大量用户报错"><a href="#案例-2-高峰期发布导致大量用户报错" class="header-anchor">#</a> 案例 2: 高峰期发布导致大量用户报错</h3> <div class="language- line-numbers-mode"><pre class="language-text"><code>场景：晚上 8-10 点是贷款申请高峰期
+
+20:00 - 在线用户：5000 人
+        ├─ 大部分用户已加载旧版本应用
+        └─ 正在浏览、填写表单、上传资料
+
+20:30 - 运维发布紧急修复（修复支付流程 bug）
+        ├─ ❌ 不使用版本目录：覆盖 index.html
+        └─ 5000 个在线用户中：
+            - 70% 用户（3500 人）正在使用应用
+            - 触发懒加载时会请求旧 chunk
+            - ❌ 大量 404 错误
+            - 🚨 客服电话被打爆
+            - 🚨 社交媒体差评
+
+20:30 - 运维发布紧急修复
+        ├─ ✅ 使用版本目录：上传 v0.1.0-20250115-hotfix/
+        └─ 5000 个在线用户：
+            - 旧用户继续使用旧版本，完全正常
+            - 新用户自动获取新版本
+            - ✅ 零投诉，零感知
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br></div></div><h3 id="案例-3-依赖链断裂导致级联失败"><a href="#案例-3-依赖链断裂导致级联失败" class="header-anchor">#</a> 案例 3: 依赖链断裂导致级联失败</h3> <div class="language- line-numbers-mode"><pre class="language-text"><code>webpack 打包后的依赖关系：
+
+index.html
+  ↓
+app.abc12345.js
+  ├─ import chunk-vendors.old123.js
+  ├─ import chunk-home.old111.js
+  └─ 动态加载: chunk-about.old333.js
+                  ↓
+             chunk-about.old333.js
+               └─ import chunk-form.old444.js
+
+问题：即使 app.abc12345.js 和 chunk-about.old333.js 都存在，
+     如果 chunk-form.old444.js 被删除了，整个应用仍会崩溃！
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br></div></div><p><strong>版本目录方案：</strong></p> <div class="language- line-numbers-mode"><pre class="language-text"><code>v0.1.0-20250115/ (完整的依赖树)
+├── index.html
+├── app.abc12345.js
+├── chunk-vendors.old123.js
+├── chunk-home.old111.js
+├── chunk-about.old333.js
+└── chunk-form.old444.js
+    ↑ 所有依赖文件都保留，依赖链完整
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br></div></div><hr> <h2 id="🏗️-技术实施方案"><a href="#🏗️-技术实施方案" class="header-anchor">#</a> 🏗️ 技术实施方案</h2> <h3 id="步骤-1-修改-vue-构建配置"><a href="#步骤-1-修改-vue-构建配置" class="header-anchor">#</a> 步骤 1: 修改 Vue 构建配置</h3> <p><strong>文件: <code>vue.config.js</code></strong></p> <p><strong>关键修改点：</strong></p> <ol><li>生成版本路径（格式：<code>v0.1.0-20250115</code>）</li> <li>根据环境变量动态设置 <code>publicPath</code></li> <li>注入版本信息到 HTML 模板</li></ol> <p><strong>修改代码：</strong></p> <div class="language-javascript line-numbers-mode"><pre class="language-javascript"><code><span class="token comment">// 在文件开头添加</span>
+<span class="token keyword">const</span> packageJson <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'./package.json'</span><span class="token punctuation">)</span>
+
+<span class="token comment">// 生成版本路径: v0.1.0-20250115</span>
+<span class="token keyword">const</span> <span class="token constant">VERSION_PATH</span> <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">v</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>packageJson<span class="token punctuation">.</span>version<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">-</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toISOString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">'T'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span>
+
+<span class="token comment">// CDN 基础路径（从环境变量读取）</span>
+<span class="token keyword">const</span> <span class="token constant">CDN_BASE_URL</span> <span class="token operator">=</span> process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">VUE_APP_CDN_BASE_URL</span> <span class="token operator">||</span> <span class="token string">''</span>
+
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token function">defineConfig</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  <span class="token comment">// 原有配置保持不变</span>
+  <span class="token literal-property property">devServer</span><span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token operator">...</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">productionSourceMap</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  
+  <span class="token comment">// 【修改】设置 CDN 路径</span>
+  <span class="token literal-property property">publicPath</span><span class="token operator">:</span> <span class="token constant">CDN_BASE_URL</span> 
+    <span class="token operator">?</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token constant">CDN_BASE_URL</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token constant">VERSION_PATH</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/</span><span class="token template-punctuation string">`</span></span>
+    <span class="token operator">:</span> <span class="token string">'./'</span><span class="token punctuation">,</span>
+  
+  <span class="token literal-property property">outputDir</span><span class="token operator">:</span> <span class="token string">'hw-prestaveloz-h5'</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">assetsDir</span><span class="token operator">:</span> <span class="token string">'static'</span><span class="token punctuation">,</span>
+
+  <span class="token function-variable function">configureWebpack</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">config</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 【保留】原有配置：强制生成 source map</span>
+    config<span class="token punctuation">.</span>devtool <span class="token operator">=</span> <span class="token string">'source-map'</span>
+    
+    <span class="token comment">// 【保留】原有配置：注入 git 分支名</span>
+    config<span class="token punctuation">.</span>plugins<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>
+      <span class="token keyword">new</span> <span class="token class-name">webpack<span class="token punctuation">.</span>DefinePlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+        <span class="token string-property property">'process.env.VUE_APP_GIT_BRANCH'</span><span class="token operator">:</span> <span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">stringify</span><span class="token punctuation">(</span><span class="token function">getGitBranch</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token punctuation">)</span>
+    
+    <span class="token comment">// 【新增】注入版本信息到 HTML 模板</span>
+    config<span class="token punctuation">.</span>plugins<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">val</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>val <span class="token keyword">instanceof</span> <span class="token class-name">HtmlWebpackPlugin</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        val<span class="token punctuation">.</span>options<span class="token punctuation">.</span>sensorsdata <span class="token operator">=</span> process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">VUE_APP_SENSORS_DATA_URL</span>
+        val<span class="token punctuation">.</span>options<span class="token punctuation">.</span>sourceMapVersion <span class="token operator">=</span> SourceMapVersion
+        val<span class="token punctuation">.</span>options<span class="token punctuation">.</span>sensorsKey <span class="token operator">=</span> process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">VUE_APP_PROJECT_KEY</span>
+        <span class="token comment">// 新增：版本路径和 CDN 基础路径</span>
+        val<span class="token punctuation">.</span>options<span class="token punctuation">.</span>versionPath <span class="token operator">=</span> <span class="token constant">VERSION_PATH</span>
+        val<span class="token punctuation">.</span>options<span class="token punctuation">.</span>cdnBaseUrl <span class="token operator">=</span> <span class="token constant">CDN_BASE_URL</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    
+    <span class="token comment">// 【保留】原有 Sentry 和神策配置...</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+  <span class="token comment">// 【保留】原有 CSS 配置（已包含 extract 配置）</span>
+  <span class="token literal-property property">css</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token literal-property property">loaderOptions</span><span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token operator">...</span> <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br></div></div><p><strong>注意事项：</strong></p> <ul><li>✅ <strong>文件名已带 hash</strong>：项目已配置 <code>[contenthash:8]</code>，无需额外修改</li> <li>✅ <strong>CSS 已提取</strong>：项目已配置 CSS extract，无需额外修改</li> <li>🔧 <strong>仅需修改 <code>publicPath</code></strong>：根据 CDN 配置动态切换路径</li> <li>🔧 <strong>仅需注入版本信息</strong>：在 HtmlWebpackPlugin 中添加版本参数</li></ul> <hr> <h3 id="步骤-2-环境变量配置"><a href="#步骤-2-环境变量配置" class="header-anchor">#</a> 步骤 2: 环境变量配置</h3> <p><strong>新增 CDN 配置到各环境文件:</strong></p> <p><code>.env.production</code>:</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token comment"># CDN 基础路径</span>
+<span class="token assign-left variable">VUE_APP_CDN_BASE_URL</span><span class="token operator">=</span>https://cdn.creditumex.com/h5/hw-prestaveloz-h5
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p><code>.env.testing</code> (test/uat/pre):</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token comment"># 测试环境 CDN</span>
+<span class="token assign-left variable">VUE_APP_CDN_BASE_URL</span><span class="token operator">=</span>https://cdn-test.creditumex.com/h5/hw-prestaveloz-h5
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p><code>.env.development</code>:</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token comment"># 开发环境不使用 CDN</span>
+<span class="token assign-left variable">VUE_APP_CDN_BASE_URL</span><span class="token operator">=</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><hr> <h3 id="步骤-3-修改-index-html"><a href="#步骤-3-修改-index-html" class="header-anchor">#</a> 步骤 3: 修改 index.html</h3> <p><strong>文件: <code>public/index.html</code></strong></p> <div class="language-html line-numbers-mode"><pre class="language-html"><code><span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">html</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span><span class="token punctuation">&quot;</span></span> <span class="token attr-name">data-version</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>&lt;%= htmlWebpackPlugin.options.versionPath || 'unknown' %&gt;<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">charset</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>utf-8<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">http-equiv</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>X-UA-Compatible<span class="token punctuation">&quot;</span></span> <span class="token attr-name">content</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>IE=edge<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>viewport<span class="token punctuation">&quot;</span></span> <span class="token attr-name">content</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">&gt;</span></span>&lt;%= htmlWebpackPlugin.options.title %&gt;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">&gt;</span></span>
+    
+    <span class="token comment">&lt;!-- index.html 必须禁用缓存 --&gt;</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">http-equiv</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>Cache-Control<span class="token punctuation">&quot;</span></span> <span class="token attr-name">content</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>no-cache, no-store, must-revalidate<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">http-equiv</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>Pragma<span class="token punctuation">&quot;</span></span> <span class="token attr-name">content</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>no-cache<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">http-equiv</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>Expires<span class="token punctuation">&quot;</span></span> <span class="token attr-name">content</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>0<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
+    
+    <span class="token comment">&lt;!-- 预连接 CDN 域名 --&gt;</span>
+    &lt;% if (htmlWebpackPlugin.options.cdnBaseUrl) { %&gt;
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>dns-prefetch<span class="token punctuation">&quot;</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>&lt;%= htmlWebpackPlugin.options.cdnBaseUrl %&gt;<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>preconnect<span class="token punctuation">&quot;</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>&lt;%= htmlWebpackPlugin.options.cdnBaseUrl %&gt;<span class="token punctuation">&quot;</span></span> <span class="token attr-name">crossorigin</span> <span class="token punctuation">/&gt;</span></span>
+    &lt;% } %&gt;
+    
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>icon<span class="token punctuation">&quot;</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>&lt;%= BASE_URL %&gt;favicon.ico<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>stylesheet<span class="token punctuation">&quot;</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>./normalize.css<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>./initFunction.js<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>./processingFunction.js<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>noscript</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>strong</span><span class="token punctuation">&gt;</span></span>We're sorry but &lt;%= htmlWebpackPlugin.options.title %&gt; doesn't work properly without JavaScript enabled. Please enable it to continue.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>strong</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>noscript</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>app<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">&gt;</span></span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br></div></div><hr> <h3 id="步骤-4-jenkins-pipeline-修改"><a href="#步骤-4-jenkins-pipeline-修改" class="header-anchor">#</a> 步骤 4: Jenkins Pipeline 修改</h3> <p><strong>文件: <code>Jenkinsfile</code></strong></p> <p><strong>新增环境变量:</strong></p> <div class="language-groovy line-numbers-mode"><pre class="language-groovy"><code>environment <span class="token punctuation">{</span>
+    <span class="token comment">// ... 原有配置 ...</span>
+    
+    <span class="token comment">// CDN 配置</span>
+    CDN_BUCKET <span class="token operator">=</span> <span class="token function">getCdnBucket</span><span class="token punctuation">(</span><span class="token interpolation-string"><span class="token string">&quot;</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$</span><span class="token expression">ENV</span></span><span class="token string">&quot;</span></span><span class="token punctuation">)</span> <span class="token comment">// 阿里云 OSS Bucket</span>
+    CDN_REGION <span class="token operator">=</span> <span class="token interpolation-string"><span class="token string">&quot;oss-ap-southeast-1&quot;</span></span> <span class="token comment">// 新加坡区域</span>
+    VERSION_PATH <span class="token operator">=</span> <span class="token interpolation-string"><span class="token string">&quot;v</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression"><span class="token function">getPackageVersion</span><span class="token punctuation">(</span><span class="token punctuation">)</span></span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">-</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression"><span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">format</span><span class="token punctuation">(</span><span class="token string">'yyyyMMdd'</span><span class="token punctuation">,</span> TimeZone<span class="token punctuation">.</span><span class="token function">getTimeZone</span><span class="token punctuation">(</span><span class="token string">'Asia/Shanghai'</span><span class="token punctuation">)</span><span class="token punctuation">)</span></span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">&quot;</span></span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br></div></div><p><strong>新增 Stage: 上传到 CDN</strong></p> <div class="language-groovy line-numbers-mode"><pre class="language-groovy"><code><span class="token function">stage</span><span class="token punctuation">(</span><span class="token string">'上传静态资源到 CDN'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    when <span class="token punctuation">{</span>
+        expression <span class="token punctuation">{</span> params<span class="token punctuation">.</span>ENV <span class="token operator">==~</span> <span class="token interpolation-string"><span class="token string">/prod|pre/</span></span> <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    steps <span class="token punctuation">{</span>
+        <span class="token function">container</span><span class="token punctuation">(</span><span class="token string">'nodejs18'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            script <span class="token punctuation">{</span>
+                echo <span class="token interpolation-string"><span class="token string">&quot;开始上传到 CDN: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">CDN_BUCKET</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">NGINX_HTML_PATH</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">VERSION_PATH</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/&quot;</span></span>
+                
+                <span class="token comment">// 安装阿里云 OSS 工具</span>
+                sh <span class="token interpolation-string"><span class="token string">&quot;&quot;&quot;
+                    wget http://gosspublic.alicdn.com/ossutil/1.7.15/ossutil64
+                    chmod 755 ossutil64
+                    
+                    # 配置 OSS 凭证（从 Jenkins 凭证管理读取）
+                    ./ossutil64 config -e </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">CDN_REGION</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">.aliyuncs.com \
+                        -i \${OSS_ACCESS_KEY_ID} \
+                        -k \${OSS_ACCESS_KEY_SECRET}
+                &quot;&quot;&quot;</span></span>
+                
+                <span class="token comment">// 上传构建产物到 CDN</span>
+                sh <span class="token interpolation-string"><span class="token string">&quot;&quot;&quot;
+                    # 上传整个版本目录
+                    ./ossutil64 cp -r </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">COPY_SOURCE_PATH</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/ \
+                        oss://</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">CDN_BUCKET</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">NGINX_HTML_PATH</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">VERSION_PATH</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/ \
+                        --update \
+                        --meta Cache-Control:public,max-age=31536000
+                    
+                    # index.html 单独上传，设置不缓存
+                    ./ossutil64 cp </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">COPY_SOURCE_PATH</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/index.html \
+                        oss://</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">CDN_BUCKET</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">NGINX_HTML_PATH</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">VERSION_PATH</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/index.html \
+                        --update \
+                        --meta Cache-Control:no-cache,no-store,must-revalidate
+                    
+                    # 更新 latest 指向（通过上传特殊文件实现重定向）
+                    echo &quot;</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">VERSION_PATH</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">&quot; &gt; latest.txt
+                    ./ossutil64 cp latest.txt \
+                        oss://</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">CDN_BUCKET</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">NGINX_HTML_PATH</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/latest.txt \
+                        --update \
+                        --meta Cache-Control:no-cache
+                &quot;&quot;&quot;</span></span>
+                
+                echo <span class="token interpolation-string"><span class="token string">&quot;CDN 上传成功! 访问路径: https://cdn.creditumex.com/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">NGINX_HTML_PATH</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">VERSION_PATH</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/&quot;</span></span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br></div></div><p><strong>新增 Stage: 清理旧版本（可选）</strong></p> <div class="language-groovy line-numbers-mode"><pre class="language-groovy"><code><span class="token function">stage</span><span class="token punctuation">(</span><span class="token string">'清理 CDN 旧版本'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    when <span class="token punctuation">{</span>
+        expression <span class="token punctuation">{</span> params<span class="token punctuation">.</span>ENV <span class="token operator">==~</span> <span class="token interpolation-string"><span class="token string">/prod|pre/</span></span> <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    steps <span class="token punctuation">{</span>
+        <span class="token function">container</span><span class="token punctuation">(</span><span class="token string">'nodejs18'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            script <span class="token punctuation">{</span>
+                echo <span class="token interpolation-string"><span class="token string">&quot;清理超过 7 天的旧版本...&quot;</span></span>
+                
+                sh <span class="token interpolation-string"><span class="token string">&quot;&quot;&quot;
+                    # 列出所有版本目录
+                    ./ossutil64 ls oss://</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">CDN_BUCKET</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">NGINX_HTML_PATH</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/ | grep '^v[0-9]' &gt; versions.txt
+                    
+                    # 计算 7 天前的日期
+                    CUTOFF_DATE=\$(date -d '7 days ago' +%Y%m%d)
+                    
+                    # 删除旧版本
+                    cat versions.txt | while read line; do
+                        VERSION=\$(basename \$line)
+                        VERSION_DATE=\$(echo \$VERSION | grep -oP '\\d{8}\$')
+                        
+                        if [ &quot;\$VERSION_DATE&quot; -lt &quot;\$CUTOFF_DATE&quot; ]; then
+                            echo &quot;删除旧版本: \$VERSION&quot;
+                            ./ossutil64 rm -r oss://</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">CDN_BUCKET</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">NGINX_HTML_PATH</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/\$VERSION/
+                        fi
+                    done
+                &quot;&quot;&quot;</span></span>
+                
+                echo <span class="token interpolation-string"><span class="token string">&quot;旧版本清理完成&quot;</span></span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br></div></div><p><strong>新增辅助函数:</strong></p> <div class="language-groovy line-numbers-mode"><pre class="language-groovy"><code><span class="token comment">// 获取 CDN Bucket 名称</span>
+<span class="token keyword">def</span> <span class="token function">getCdnBucket</span><span class="token punctuation">(</span>env<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">switch</span><span class="token punctuation">(</span>env<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">case</span> <span class="token string">'prod'</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span> <span class="token string">'trucred-cdn-prod'</span>
+        <span class="token keyword">case</span> <span class="token string">'pre'</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span> <span class="token string">'trucred-cdn-pre'</span>
+        <span class="token keyword">case</span> <span class="token string">'test'</span><span class="token punctuation">:</span>
+        <span class="token keyword">case</span> <span class="token string">'uat'</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span> <span class="token string">'trucred-cdn-test'</span>
+        <span class="token keyword">default</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span> <span class="token string">'trucred-cdn-dev'</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// 从 package.json 读取版本号</span>
+<span class="token keyword">def</span> <span class="token function">getPackageVersion</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">def</span> packageJson <span class="token operator">=</span> readJSON file<span class="token punctuation">:</span> <span class="token string">'package.json'</span>
+    <span class="token keyword">return</span> packageJson<span class="token punctuation">.</span>version
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br></div></div><hr> <h3 id="步骤-5-nginx-配置-入口服务器"><a href="#步骤-5-nginx-配置-入口服务器" class="header-anchor">#</a> 步骤 5: Nginx 配置（入口服务器）</h3> <p><strong>文件: <code>nginx.conf</code> (主域名服务器配置)</strong></p> <div class="language-nginx line-numbers-mode"><pre class="language-nginx"><code><span class="token directive"><span class="token keyword">server</span></span> <span class="token punctuation">{</span>
+    <span class="token directive"><span class="token keyword">listen</span> <span class="token number">80</span></span><span class="token punctuation">;</span>
+    <span class="token directive"><span class="token keyword">server_name</span> h5.creditumex.com</span><span class="token punctuation">;</span>
+
+    <span class="token comment"># 重定向到 CDN latest 版本</span>
+    <span class="token directive"><span class="token keyword">location</span> /</span> <span class="token punctuation">{</span>
+        <span class="token comment"># 读取 latest.txt 获取最新版本号</span>
+        <span class="token directive"><span class="token keyword">set</span> <span class="token variable">$latest_version</span> <span class="token string">''</span></span><span class="token punctuation">;</span>
+        
+        <span class="token comment"># 方案A: 使用 Nginx Lua 模块动态读取</span>
+        <span class="token directive"><span class="token keyword">access_by_lua_block</span></span> <span class="token punctuation">{</span>
+            <span class="token directive"><span class="token keyword">local</span> http = require <span class="token string">&quot;resty.http&quot;</span>
+            local httpc = http.new()
+            
+            local res, err = httpc:request_uri(<span class="token string">&quot;https://cdn.creditumex.com/h5/hw-prestaveloz-h5/latest.txt&quot;</span>,</span> <span class="token punctuation">{</span>
+                method = &quot;GET&quot;,
+            <span class="token punctuation">}</span>)
+            
+            if res and res.status == 200 then
+                ngx.var.latest_version = res.body:gsub(&quot;%s+&quot;, &quot;&quot;)
+            else
+                ngx.var.latest_version = &quot;v0.1.0-20250115&quot; -- 默认版本
+            end
+        <span class="token punctuation">}</span>
+        
+        <span class="token comment"># 重定向到最新版本</span>
+        <span class="token directive"><span class="token keyword">return</span> <span class="token number">302</span> https://cdn.creditumex.com/h5/hw-prestaveloz-h5/<span class="token variable">$latest_version</span><span class="token variable">$request_uri</span></span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment"># 方案B: 简化版 - 直接重定向到 latest 软链接</span>
+<span class="token directive"><span class="token keyword">server</span></span> <span class="token punctuation">{</span>
+    <span class="token directive"><span class="token keyword">listen</span> <span class="token number">80</span></span><span class="token punctuation">;</span>
+    <span class="token directive"><span class="token keyword">server_name</span> h5.creditumex.com</span><span class="token punctuation">;</span>
+
+    <span class="token directive"><span class="token keyword">location</span> /</span> <span class="token punctuation">{</span>
+        <span class="token directive"><span class="token keyword">return</span> <span class="token number">302</span> https://cdn.creditumex.com/h5/hw-prestaveloz-h5/latest<span class="token variable">$request_uri</span></span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br></div></div><hr> <h3 id="步骤-6-cdn-缓存策略配置"><a href="#步骤-6-cdn-缓存策略配置" class="header-anchor">#</a> 步骤 6: CDN 缓存策略配置</h3> <p><strong>阿里云 CDN 控制台配置:</strong></p> <h4 id="缓存规则-1-静态资源长缓存"><a href="#缓存规则-1-静态资源长缓存" class="header-anchor">#</a> 缓存规则 1: 静态资源长缓存</h4> <div class="language- line-numbers-mode"><pre class="language-text"><code>路径: /h5/hw-prestaveloz-h5/v*/static/*
+缓存时间: 31536000 秒 (1年)
+Cache-Control: public, max-age=31536000, immutable
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><h4 id="缓存规则-2-index-html-不缓存"><a href="#缓存规则-2-index-html-不缓存" class="header-anchor">#</a> 缓存规则 2: index.html 不缓存</h4> <div class="language- line-numbers-mode"><pre class="language-text"><code>路径: /h5/hw-prestaveloz-h5/*/index.html
+缓存时间: 0 秒
+Cache-Control: no-cache, no-store, must-revalidate
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><h4 id="缓存规则-3-latest-txt-不缓存"><a href="#缓存规则-3-latest-txt-不缓存" class="header-anchor">#</a> 缓存规则 3: latest.txt 不缓存</h4> <div class="language- line-numbers-mode"><pre class="language-text"><code>路径: /h5/hw-prestaveloz-h5/latest.txt
+缓存时间: 0 秒
+Cache-Control: no-cache
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><h4 id="cors-配置"><a href="#cors-配置" class="header-anchor">#</a> CORS 配置</h4> <div class="language- line-numbers-mode"><pre class="language-text"><code>允许的源: https://h5.creditumex.com, https://www.creditumex.com
+允许的方法: GET, HEAD
+允许的头部: *
+缓存预检请求: 86400 秒
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><h4 id="gzip-压缩"><a href="#gzip-压缩" class="header-anchor">#</a> Gzip 压缩</h4> <div class="language- line-numbers-mode"><pre class="language-text"><code>启用 Gzip 压缩
+文件类型: text/*, application/javascript, application/json, image/svg+xml
+最小文件大小: 1KB
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><hr> <h2 id="📊-方案优势分析"><a href="#📊-方案优势分析" class="header-anchor">#</a> 📊 方案优势分析</h2> <h3 id="✅-核心优势"><a href="#✅-核心优势" class="header-anchor">#</a> ✅ 核心优势</h3> <table><thead><tr><th>优势项</th> <th>说明</th> <th>收益</th></tr></thead> <tbody><tr><td><strong>全球加速</strong></td> <td>CDN 节点遍布全球，就近访问</td> <td>墨西哥用户延迟从 200ms 降至 50ms</td></tr> <tr><td><strong>版本隔离</strong></td> <td>每个版本独立目录，互不干扰</td> <td>100% 避免旧用户资源 404 错误</td></tr> <tr><td><strong>性能优化</strong></td> <td>静态资源 1 年缓存，减少 95% 请求</td> <td>页面加载速度提升 60%</td></tr> <tr><td><strong>成本可控</strong></td> <td>按流量计费，存储成本低</td> <td>每月约 $50-100（10GB 存储 + 100GB 流量）</td></tr> <tr><td><strong>快速回滚</strong></td> <td>修改 latest 指向即可回滚</td> <td>回滚耗时 &lt; 1 分钟</td></tr> <tr><td><strong>平台无关</strong></td> <td>适用于任何部署环境</td> <td>未来可迁移到 Serverless/静态托管</td></tr></tbody></table> <h3 id="📈-性能提升预估"><a href="#📈-性能提升预估" class="header-anchor">#</a> 📈 性能提升预估</h3> <p><strong>场景: 墨西哥用户访问</strong></p> <table><thead><tr><th>指标</th> <th>当前 K8s 方案</th> <th>CDN 方案</th> <th>提升</th></tr></thead> <tbody><tr><td><strong>首次加载时间</strong></td> <td>3.5s</td> <td>1.2s</td> <td>⬇️ 66%</td></tr> <tr><td><strong>缓存命中后加载</strong></td> <td>1.8s</td> <td>0.5s</td> <td>⬇️ 72%</td></tr> <tr><td><strong>静态资源请求延迟</strong></td> <td>200ms</td> <td>50ms</td> <td>⬇️ 75%</td></tr> <tr><td><strong>服务器带宽占用</strong></td> <td>100%</td> <td>5%</td> <td>⬇️ 95%</td></tr> <tr><td><strong>并发处理能力</strong></td> <td>500 QPS</td> <td>10000+ QPS</td> <td>⬆️ 20x</td></tr></tbody></table> <hr> <h2 id="💰-成本分析"><a href="#💰-成本分析" class="header-anchor">#</a> 💰 成本分析</h2> <h3 id="阿里云-cdn-费用预估-墨西哥用户为主"><a href="#阿里云-cdn-费用预估-墨西哥用户为主" class="header-anchor">#</a> 阿里云 CDN 费用预估（墨西哥用户为主）</h3> <h4 id="存储成本"><a href="#存储成本" class="header-anchor">#</a> 存储成本</h4> <div class="language- line-numbers-mode"><pre class="language-text"><code>版本保留策略: 7 天
+单次构建大小: 10 MB
+每日发布次数: 2 次
+
+存储占用 = 10 MB × 2 × 7 = 140 MB
+阿里云 OSS 存储费用 = 140 MB × $0.02/GB = $0.003/月
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><h4 id="流量成本"><a href="#流量成本" class="header-anchor">#</a> 流量成本</h4> <div class="language- line-numbers-mode"><pre class="language-text"><code>月活用户: 10,000
+平均会话: 3 次/月/用户
+缓存命中率: 95%
+
+首次访问流量 = 10 MB × 10,000 × 3 × 5% = 15 GB
+阿里云 CDN 流量费用（墨西哥） = 15 GB × $0.15/GB = $2.25/月
+
+实际流量（考虑回源）≈ 20 GB
+总流量成本 ≈ $3/月
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><h4 id="请求次数成本"><a href="#请求次数成本" class="header-anchor">#</a> 请求次数成本</h4> <div class="language- line-numbers-mode"><pre class="language-text"><code>月总请求数 = 10,000 × 3 × 20 = 600,000 次
+阿里云 CDN 请求费用 = 600,000 × $0.01/万次 = $0.60/月
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><h4 id="总成本"><a href="#总成本" class="header-anchor">#</a> 总成本</h4> <div class="language- line-numbers-mode"><pre class="language-text"><code>存储: $0.003/月
+流量: $3/月
+请求: $0.60/月
+合计: ≈ $4/月 (约 ¥30/月)
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><h3 id="成本优化建议"><a href="#成本优化建议" class="header-anchor">#</a> 成本优化建议</h3> <ol><li><strong>启用智能压缩</strong>: Gzip 可减少 70% 流量，成本降至 $1.2/月</li> <li><strong>延长保留周期</strong>: 改为 14 天，存储成本仅增加 $0.003</li> <li><strong>使用流量包</strong>: 购买 100GB 流量包 ($10/年)，比按需付费便宜 60%</li></ol> <hr> <h2 id="🚀-部署流程"><a href="#🚀-部署流程" class="header-anchor">#</a> 🚀 部署流程</h2> <h3 id="首次部署-生产环境"><a href="#首次部署-生产环境" class="header-anchor">#</a> 首次部署（生产环境）</h3> <h4 id="_1-创建阿里云-oss-bucket"><a href="#_1-创建阿里云-oss-bucket" class="header-anchor">#</a> 1. 创建阿里云 OSS Bucket</h4> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token comment"># 登录阿里云控制台 -&gt; 对象存储 OSS</span>
+<span class="token comment"># 创建 Bucket: trucred-cdn-prod</span>
+<span class="token comment"># 区域: 新加坡（离墨西哥较近）</span>
+<span class="token comment"># 读写权限: 公共读</span>
+<span class="token comment"># 版本控制: 启用</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><h4 id="_2-配置-cdn-加速域名"><a href="#_2-配置-cdn-加速域名" class="header-anchor">#</a> 2. 配置 CDN 加速域名</h4> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token comment"># 阿里云控制台 -&gt; CDN</span>
+<span class="token comment"># 添加加速域名: cdn.creditumex.com</span>
+<span class="token comment"># 源站类型: OSS 域名</span>
+<span class="token comment"># 源站地址: trucred-cdn-prod.oss-ap-southeast-1.aliyuncs.com</span>
+<span class="token comment"># 加速区域: 全球加速（或仅境外加速）</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><h4 id="_3-配置-jenkins-凭证"><a href="#_3-配置-jenkins-凭证" class="header-anchor">#</a> 3. 配置 Jenkins 凭证</h4> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token comment"># Jenkins 凭证管理</span>
+<span class="token comment"># 新增: OSS_ACCESS_KEY_ID (阿里云 AccessKey ID)</span>
+<span class="token comment"># 新增: OSS_ACCESS_KEY_SECRET (阿里云 AccessKey Secret)</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><h4 id="_4-首次构建发布"><a href="#_4-首次构建发布" class="header-anchor">#</a> 4. 首次构建发布</h4> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token comment"># 1. 触发 Jenkins 构建（选择 prod 环境）</span>
+<span class="token comment"># 2. Pipeline 自动执行:</span>
+<span class="token comment">#    - 构建项目 (yarn build:prod)</span>
+<span class="token comment">#    - 上传到 CDN (ossutil64 cp)</span>
+<span class="token comment">#    - 更新 latest 指向</span>
+<span class="token comment">#    - 部署 K8s（可选，作为兜底）</span>
+
+<span class="token comment"># 3. 验证 CDN 访问</span>
+<span class="token function">curl</span> <span class="token parameter variable">-I</span> https://cdn.creditumex.com/h5/hw-prestaveloz-h5/v0.1.0-20250115/index.html
+<span class="token comment"># 检查响应头: Cache-Control: no-cache</span>
+
+<span class="token function">curl</span> <span class="token parameter variable">-I</span> https://cdn.creditumex.com/h5/hw-prestaveloz-h5/v0.1.0-20250115/static/js/app.abc12345.js
+<span class="token comment"># 检查响应头: Cache-Control: public, max-age=31536000</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br></div></div><h4 id="_5-配置主域名重定向"><a href="#_5-配置主域名重定向" class="header-anchor">#</a> 5. 配置主域名重定向</h4> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token comment"># Nginx 配置文件添加重定向规则（见步骤 5）</span>
+nginx <span class="token parameter variable">-t</span> <span class="token operator">&amp;&amp;</span> nginx <span class="token parameter variable">-s</span> reload
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><h4 id="_6-验证完整流程"><a href="#_6-验证完整流程" class="header-anchor">#</a> 6. 验证完整流程</h4> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token comment"># 访问主域名</span>
+<span class="token function">curl</span> <span class="token parameter variable">-I</span> https://h5.creditumex.com/
+<span class="token comment"># 应返回 302 重定向到 CDN</span>
+
+<span class="token comment"># 浏览器访问</span>
+https://h5.creditumex.com/
+<span class="token comment"># 检查开发者工具 Network 面板，所有资源应从 CDN 加载</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><hr> <h3 id="日常发布流程"><a href="#日常发布流程" class="header-anchor">#</a> 日常发布流程</h3> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token number">1</span>. 开发完成，提交代码到 Git
+<span class="token number">2</span>. Jenkins 触发构建（手动或自动）
+<span class="token number">3</span>. Pipeline 自动执行:
+   ├─ 构建新版本 <span class="token punctuation">(</span>v0.1.1-20250116<span class="token punctuation">)</span>
+   ├─ 上传到 CDN <span class="token punctuation">(</span>新版本目录<span class="token punctuation">)</span>
+   ├─ 更新 latest.txt
+   └─ 清理 <span class="token number">7</span> 天前旧版本
+<span class="token number">4</span>. 用户访问自动获取最新版本
+<span class="token number">5</span>. 旧用户继续使用旧版本（缓存未过期）
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><p><strong>发布耗时:</strong></p> <ul><li>构建: 2-3 分钟</li> <li>CDN 上传: 30-60 秒</li> <li>全球 CDN 刷新: 5-10 分钟</li> <li><strong>总计: 约 10 分钟全球生效</strong></li></ul> <hr> <h2 id="🔧-运维管理"><a href="#🔧-运维管理" class="header-anchor">#</a> 🔧 运维管理</h2> <h3 id="监控指标"><a href="#监控指标" class="header-anchor">#</a> 监控指标</h3> <h4 id="cdn-控制台监控"><a href="#cdn-控制台监控" class="header-anchor">#</a> CDN 控制台监控</h4> <div class="language- line-numbers-mode"><pre class="language-text"><code>1. 流量监控
+   - 每日流量趋势
+   - 峰值带宽
+   - 流量异常告警
+
+2. 请求分析
+   - 请求总数
+   - 状态码分布（200/304/404/5xx）
+   - 回源率（应 &lt; 5%）
+
+3. 性能指标
+   - 命中率（应 &gt; 95%）
+   - 平均响应时间
+   - 各区域延迟分布
+
+4. 成本预警
+   - 日流量超过预算告警
+   - 存储容量告警
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br></div></div><h4 id="自定义监控脚本"><a href="#自定义监控脚本" class="header-anchor">#</a> 自定义监控脚本</h4> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token shebang important">#!/bin/bash</span>
+<span class="token comment"># 文件: monitor-cdn-versions.sh</span>
+
+<span class="token comment"># 检查 CDN 版本数量</span>
+<span class="token assign-left variable">VERSION_COUNT</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span>./ossutil64 <span class="token function">ls</span> oss://trucred-cdn-prod/h5/hw-prestaveloz-h5/ <span class="token operator">|</span> <span class="token function">grep</span> <span class="token parameter variable">-c</span> <span class="token string">'^v[0-9]'</span><span class="token variable">)</span></span>
+
+<span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token variable">$VERSION_COUNT</span> <span class="token parameter variable">-gt</span> <span class="token number">14</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+    <span class="token builtin class-name">echo</span> <span class="token string">&quot;警告: CDN 版本数量过多 (<span class="token variable">$VERSION_COUNT</span>)，建议清理&quot;</span>
+    <span class="token comment"># 发送告警到 Slack/钉钉</span>
+<span class="token keyword">fi</span>
+
+<span class="token comment"># 检查 latest.txt 是否有效</span>
+<span class="token assign-left variable">LATEST_VERSION</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token function">curl</span> <span class="token parameter variable">-s</span> https://cdn.creditumex.com/h5/hw-prestaveloz-h5/latest.txt<span class="token variable">)</span></span>
+<span class="token keyword">if</span> <span class="token operator">!</span> ./ossutil64 <span class="token function">ls</span> oss://trucred-cdn-prod/h5/hw-prestaveloz-h5/<span class="token variable">$LATEST_VERSION</span>/ <span class="token operator">&gt;</span> /dev/null<span class="token punctuation">;</span> <span class="token keyword">then</span>
+    <span class="token builtin class-name">echo</span> <span class="token string">&quot;错误: latest.txt 指向的版本不存在: <span class="token variable">$LATEST_VERSION</span>&quot;</span>
+    <span class="token comment"># 紧急告警</span>
+<span class="token keyword">fi</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br></div></div><h3 id="手动清理旧版本"><a href="#手动清理旧版本" class="header-anchor">#</a> 手动清理旧版本</h3> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token shebang important">#!/bin/bash</span>
+<span class="token comment"># 文件: cleanup-cdn-old-versions.sh</span>
+
+<span class="token comment"># 配置</span>
+<span class="token assign-left variable">BUCKET</span><span class="token operator">=</span><span class="token string">&quot;trucred-cdn-prod&quot;</span>
+<span class="token assign-left variable">BASE_PATH</span><span class="token operator">=</span><span class="token string">&quot;h5/hw-prestaveloz-h5&quot;</span>
+<span class="token assign-left variable">DAYS_TO_KEEP</span><span class="token operator">=</span><span class="token number">7</span>
+
+<span class="token comment"># 下载 ossutil</span>
+<span class="token function">wget</span> http://gosspublic.alicdn.com/ossutil/1.7.15/ossutil64
+<span class="token function">chmod</span> <span class="token number">755</span> ossutil64
+
+<span class="token comment"># 配置凭证</span>
+./ossutil64 config <span class="token parameter variable">-e</span> oss-ap-southeast-1.aliyuncs.com <span class="token punctuation">\</span>
+    <span class="token parameter variable">-i</span> <span class="token variable">${OSS_ACCESS_KEY_ID}</span> <span class="token punctuation">\</span>
+    <span class="token parameter variable">-k</span> <span class="token variable">${OSS_ACCESS_KEY_SECRET}</span>
+
+<span class="token comment"># 列出所有版本</span>
+./ossutil64 <span class="token function">ls</span> oss://<span class="token variable">${BUCKET}</span>/<span class="token variable">${BASE_PATH}</span>/ <span class="token operator">|</span> <span class="token function">grep</span> <span class="token string">'^v[0-9]'</span> <span class="token operator">&gt;</span> versions.txt
+
+<span class="token comment"># 计算截止日期</span>
+<span class="token assign-left variable">CUTOFF_DATE</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token function">date</span> <span class="token parameter variable">-d</span> <span class="token string">&quot;<span class="token variable">${DAYS_TO_KEEP}</span> days ago&quot;</span> +%Y%m%d<span class="token variable">)</span></span>
+
+<span class="token comment"># 删除旧版本</span>
+<span class="token function">cat</span> versions.txt <span class="token operator">|</span> <span class="token keyword">while</span> <span class="token builtin class-name">read</span> line<span class="token punctuation">;</span> <span class="token keyword">do</span>
+    <span class="token assign-left variable">VERSION</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token function">basename</span> $line<span class="token variable">)</span></span>
+    <span class="token assign-left variable">VERSION_DATE</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token builtin class-name">echo</span> $VERSION <span class="token operator">|</span> <span class="token function">grep</span> <span class="token parameter variable">-oP</span> <span class="token string">'\d{8}$'</span><span class="token variable">)</span></span>
+    
+    <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token string">&quot;<span class="token variable">$VERSION_DATE</span>&quot;</span> <span class="token parameter variable">-lt</span> <span class="token string">&quot;<span class="token variable">$CUTOFF_DATE</span>&quot;</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+        <span class="token builtin class-name">echo</span> <span class="token string">&quot;删除旧版本: <span class="token variable">$VERSION</span>&quot;</span>
+        ./ossutil64 <span class="token function">rm</span> <span class="token parameter variable">-r</span> oss://<span class="token variable">${BUCKET}</span>/<span class="token variable">${BASE_PATH}</span>/<span class="token variable">$VERSION</span>/
+    <span class="token keyword">else</span>
+        <span class="token builtin class-name">echo</span> <span class="token string">&quot;保留版本: <span class="token variable">$VERSION</span>&quot;</span>
+    <span class="token keyword">fi</span>
+<span class="token keyword">done</span>
+
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;清理完成&quot;</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br></div></div><h3 id="快速回滚"><a href="#快速回滚" class="header-anchor">#</a> 快速回滚</h3> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token shebang important">#!/bin/bash</span>
+<span class="token comment"># 文件: rollback-cdn-version.sh</span>
+
+<span class="token comment"># 参数: 目标版本号</span>
+<span class="token assign-left variable">TARGET_VERSION</span><span class="token operator">=</span><span class="token variable">$1</span>
+
+<span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token parameter variable">-z</span> <span class="token string">&quot;<span class="token variable">$TARGET_VERSION</span>&quot;</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+    <span class="token builtin class-name">echo</span> <span class="token string">&quot;用法: ./rollback-cdn-version.sh v0.1.0-20250115&quot;</span>
+    <span class="token builtin class-name">exit</span> <span class="token number">1</span>
+<span class="token keyword">fi</span>
+
+<span class="token comment"># 检查版本是否存在</span>
+<span class="token keyword">if</span> <span class="token operator">!</span> ./ossutil64 <span class="token function">ls</span> oss://trucred-cdn-prod/h5/hw-prestaveloz-h5/<span class="token variable">$TARGET_VERSION</span>/ <span class="token operator">&gt;</span> /dev/null<span class="token punctuation">;</span> <span class="token keyword">then</span>
+    <span class="token builtin class-name">echo</span> <span class="token string">&quot;错误: 版本 <span class="token variable">$TARGET_VERSION</span> 不存在&quot;</span>
+    <span class="token builtin class-name">exit</span> <span class="token number">1</span>
+<span class="token keyword">fi</span>
+
+<span class="token comment"># 更新 latest.txt</span>
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;<span class="token variable">$TARGET_VERSION</span>&quot;</span> <span class="token operator">&gt;</span> latest.txt
+./ossutil64 <span class="token function">cp</span> latest.txt <span class="token punctuation">\</span>
+    oss://trucred-cdn-prod/h5/hw-prestaveloz-h5/latest.txt <span class="token punctuation">\</span>
+    <span class="token parameter variable">--update</span> <span class="token punctuation">\</span>
+    <span class="token parameter variable">--meta</span> Cache-Control:no-cache
+
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;回滚成功! 当前版本: <span class="token variable">$TARGET_VERSION</span>&quot;</span>
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;生效时间: 5-10 分钟（CDN 缓存刷新）&quot;</span>
+
+<span class="token comment"># 可选: 主动刷新 CDN 缓存</span>
+<span class="token comment"># aliyun cdn RefreshObjectCaches --ObjectPath=https://cdn.creditumex.com/h5/hw-prestaveloz-h5/latest.txt</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br></div></div><hr> <h2 id="🔍-故障排查"><a href="#🔍-故障排查" class="header-anchor">#</a> 🔍 故障排查</h2> <h3 id="问题-1-用户报告加载失败"><a href="#问题-1-用户报告加载失败" class="header-anchor">#</a> 问题 1: 用户报告加载失败</h3> <p><strong>排查步骤:</strong></p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token comment"># 1. 检查 CDN 版本是否存在</span>
+./ossutil64 <span class="token function">ls</span> oss://trucred-cdn-prod/h5/hw-prestaveloz-h5/ <span class="token operator">|</span> <span class="token function">grep</span> v0.1.0
+
+<span class="token comment"># 2. 检查 latest.txt 内容</span>
+<span class="token function">curl</span> https://cdn.creditumex.com/h5/hw-prestaveloz-h5/latest.txt
+
+<span class="token comment"># 3. 测试 CDN 访问</span>
+<span class="token function">curl</span> <span class="token parameter variable">-I</span> https://cdn.creditumex.com/h5/hw-prestaveloz-h5/v0.1.0-20250115/index.html
+
+<span class="token comment"># 4. 查看 CDN 日志（阿里云控制台 -&gt; CDN -&gt; 日志管理）</span>
+<span class="token comment"># 筛选状态码 404/5xx</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br></div></div><p><strong>可能原因:</strong></p> <ul><li>latest.txt 指向的版本不存在 → 手动修复 latest.txt</li> <li>CDN 缓存未刷新 → 控制台刷新缓存</li> <li>文件上传失败 → 重新触发 Jenkins 构建</li></ul> <hr> <h3 id="问题-2-cdn-成本异常增加"><a href="#问题-2-cdn-成本异常增加" class="header-anchor">#</a> 问题 2: CDN 成本异常增加</h3> <p><strong>排查步骤:</strong></p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token comment"># 1. 检查流量趋势（阿里云控制台 -&gt; CDN -&gt; 监控）</span>
+<span class="token comment"># 查看流量突增时间点</span>
+
+<span class="token comment"># 2. 分析访问日志</span>
+<span class="token comment"># 检查是否有异常 IP 或 User-Agent</span>
+
+<span class="token comment"># 3. 检查回源率</span>
+<span class="token comment"># 回源率 &gt; 20% 说明缓存配置有问题</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br></div></div><p><strong>优化措施:</strong></p> <ul><li>启用防盗链（Referer 白名单）</li> <li>配置 IP 黑名单（屏蔽恶意爬虫）</li> <li>调整缓存策略（延长缓存时间）</li> <li>启用 Gzip 压缩（减少流量）</li></ul> <hr> <h3 id="问题-3-新版本发布后用户仍看到旧版本"><a href="#问题-3-新版本发布后用户仍看到旧版本" class="header-anchor">#</a> 问题 3: 新版本发布后用户仍看到旧版本</h3> <p><strong>原因分析:</strong></p> <ol><li>浏览器缓存了 index.html（最常见）</li> <li>CDN 缓存未刷新</li> <li>latest.txt 未更新</li></ol> <p><strong>解决方案:</strong></p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token comment"># 1. 检查 latest.txt</span>
+<span class="token function">curl</span> https://cdn.creditumex.com/h5/hw-prestaveloz-h5/latest.txt
+
+<span class="token comment"># 2. 刷新 CDN 缓存（阿里云控制台）</span>
+<span class="token comment"># 刷新路径: https://cdn.creditumex.com/h5/hw-prestaveloz-h5/latest.txt</span>
+
+<span class="token comment"># 3. 引导用户强制刷新</span>
+<span class="token comment"># Chrome: Ctrl + Shift + R</span>
+<span class="token comment"># Safari: Cmd + Shift + R</span>
+
+<span class="token comment"># 4. 未来预防: 在 index.html 添加版本检测（见&quot;增强方案&quot;）</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br></div></div><hr> <h2 id="🚀-增强方案"><a href="#🚀-增强方案" class="header-anchor">#</a> 🚀 增强方案</h2> <h3 id="方案-a-前端版本检测-自动刷新"><a href="#方案-a-前端版本检测-自动刷新" class="header-anchor">#</a> 方案 A: 前端版本检测 + 自动刷新</h3> <p><strong>适用场景:</strong> 希望用户主动更新到最新版本</p> <div class="language-javascript line-numbers-mode"><pre class="language-javascript"><code><span class="token comment">// 文件: src/utils/versionCheck.js</span>
+
+<span class="token comment">/**
+ * 版本检测工具
+ * 每 5 分钟检查一次是否有新版本
+ */</span>
+<span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">checkVersion</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// 只在生产环境启用</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">NODE_ENV</span> <span class="token operator">!==</span> <span class="token string">'production'</span><span class="token punctuation">)</span> <span class="token keyword">return</span>
+
+  <span class="token keyword">const</span> <span class="token constant">CHECK_INTERVAL</span> <span class="token operator">=</span> <span class="token number">5</span> <span class="token operator">*</span> <span class="token number">60</span> <span class="token operator">*</span> <span class="token number">1000</span> <span class="token comment">// 5 分钟</span>
+  <span class="token keyword">const</span> currentVersion <span class="token operator">=</span> document<span class="token punctuation">.</span>documentElement<span class="token punctuation">.</span>dataset<span class="token punctuation">.</span>version
+
+  <span class="token keyword">const</span> <span class="token function-variable function">checkUpdate</span> <span class="token operator">=</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword">try</span> <span class="token punctuation">{</span>
+      <span class="token comment">// 获取 latest.txt</span>
+      <span class="token keyword">const</span> response <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">fetch</span><span class="token punctuation">(</span>
+        <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">VUE_APP_CDN_BASE_URL</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/latest.txt?t=</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>Date<span class="token punctuation">.</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span> <span class="token literal-property property">cache</span><span class="token operator">:</span> <span class="token string">'no-cache'</span> <span class="token punctuation">}</span>
+      <span class="token punctuation">)</span>
+      <span class="token keyword">const</span> latestVersion <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">await</span> response<span class="token punctuation">.</span><span class="token function">text</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">trim</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>latestVersion <span class="token operator">&amp;&amp;</span> latestVersion <span class="token operator">!==</span> currentVersion<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'发现新版本:'</span><span class="token punctuation">,</span> latestVersion<span class="token punctuation">)</span>
+        
+        <span class="token comment">// 提示用户更新（使用项目中的 Toast 组件）</span>
+        <span class="token function">showUpdateNotification</span><span class="token punctuation">(</span>latestVersion<span class="token punctuation">)</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span>error<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      console<span class="token punctuation">.</span><span class="token function">warn</span><span class="token punctuation">(</span><span class="token string">'版本检测失败:'</span><span class="token punctuation">,</span> error<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">// 首次检查延迟 30 秒（避免影响首屏加载）</span>
+  <span class="token function">setTimeout</span><span class="token punctuation">(</span>checkUpdate<span class="token punctuation">,</span> <span class="token number">30000</span><span class="token punctuation">)</span>
+  
+  <span class="token comment">// 定期检查</span>
+  <span class="token function">setInterval</span><span class="token punctuation">(</span>checkUpdate<span class="token punctuation">,</span> <span class="token constant">CHECK_INTERVAL</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">showUpdateNotification</span><span class="token punctuation">(</span><span class="token parameter">newVersion</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// 方案 1: 温和提示，5 秒后自动刷新</span>
+  <span class="token keyword">const</span> message <span class="token operator">=</span> <span class="token string">'发现新版本，即将自动更新...'</span>
+  <span class="token comment">// Toast(message) // 使用项目中的 Toast 组件</span>
+  
+  <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    window<span class="token punctuation">.</span>location<span class="token punctuation">.</span><span class="token function">reload</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">5000</span><span class="token punctuation">)</span>
+
+  <span class="token comment">// 方案 2: 用户确认后刷新</span>
+  <span class="token comment">// if (confirm('发现新版本，是否立即更新？')) {</span>
+  <span class="token comment">//   window.location.reload(true)</span>
+  <span class="token comment">// }</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br></div></div><p><strong>集成到项目:</strong></p> <div class="language-javascript line-numbers-mode"><pre class="language-javascript"><code><span class="token comment">// 文件: src/main.js</span>
+
+<span class="token keyword">import</span> <span class="token punctuation">{</span> checkVersion <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@/utils/versionCheck'</span>
+
+<span class="token comment">// Vue 实例创建后启动版本检测</span>
+<span class="token keyword">new</span> <span class="token class-name">Vue</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  router<span class="token punctuation">,</span>
+  store<span class="token punctuation">,</span>
+  <span class="token function-variable function">render</span><span class="token operator">:</span> <span class="token parameter">h</span> <span class="token operator">=&gt;</span> <span class="token function">h</span><span class="token punctuation">(</span>App<span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token function">mounted</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">checkVersion</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">$mount</span><span class="token punctuation">(</span><span class="token string">'#app'</span><span class="token punctuation">)</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br></div></div><hr> <h3 id="方案-b-service-worker-离线缓存"><a href="#方案-b-service-worker-离线缓存" class="header-anchor">#</a> 方案 B: Service Worker 离线缓存</h3> <p><strong>适用场景:</strong> 需要离线访问能力（未来 PWA 化）</p> <div class="language-javascript line-numbers-mode"><pre class="language-javascript"><code><span class="token comment">// 文件: public/service-worker.js</span>
+
+<span class="token keyword">const</span> <span class="token constant">VERSION</span> <span class="token operator">=</span> <span class="token string">'v0.1.0-20250115'</span>
+<span class="token keyword">const</span> <span class="token constant">CACHE_NAME</span> <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">trucred-h5-</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token constant">VERSION</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span>
+
+<span class="token comment">// 需要缓存的资源</span>
+<span class="token keyword">const</span> <span class="token constant">CACHE_URLS</span> <span class="token operator">=</span> <span class="token punctuation">[</span>
+  <span class="token string">'/'</span><span class="token punctuation">,</span>
+  <span class="token string">'/index.html'</span><span class="token punctuation">,</span>
+  <span class="token string">'/static/css/app.css'</span><span class="token punctuation">,</span>
+  <span class="token string">'/static/js/app.js'</span><span class="token punctuation">,</span>
+  <span class="token string">'/favicon.ico'</span>
+<span class="token punctuation">]</span>
+
+<span class="token comment">// 安装 Service Worker</span>
+self<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'install'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">event</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  event<span class="token punctuation">.</span><span class="token function">waitUntil</span><span class="token punctuation">(</span>
+    caches<span class="token punctuation">.</span><span class="token function">open</span><span class="token punctuation">(</span><span class="token constant">CACHE_NAME</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">cache</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      <span class="token keyword">return</span> cache<span class="token punctuation">.</span><span class="token function">addAll</span><span class="token punctuation">(</span><span class="token constant">CACHE_URLS</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token punctuation">)</span>
+  self<span class="token punctuation">.</span><span class="token function">skipWaiting</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">// 立即激活</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token comment">// 激活 Service Worker，清理旧缓存</span>
+self<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'activate'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">event</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  event<span class="token punctuation">.</span><span class="token function">waitUntil</span><span class="token punctuation">(</span>
+    caches<span class="token punctuation">.</span><span class="token function">keys</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">cacheNames</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      <span class="token keyword">return</span> Promise<span class="token punctuation">.</span><span class="token function">all</span><span class="token punctuation">(</span>
+        cacheNames
+          <span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">name</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> name <span class="token operator">!==</span> <span class="token constant">CACHE_NAME</span><span class="token punctuation">)</span>
+          <span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">name</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> caches<span class="token punctuation">.</span><span class="token function">delete</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">)</span>
+      <span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token punctuation">)</span>
+  self<span class="token punctuation">.</span>clients<span class="token punctuation">.</span><span class="token function">claim</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">// 立即控制所有页面</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token comment">// 拦截请求，优先使用缓存</span>
+self<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'fetch'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">event</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  event<span class="token punctuation">.</span><span class="token function">respondWith</span><span class="token punctuation">(</span>
+    caches<span class="token punctuation">.</span><span class="token function">match</span><span class="token punctuation">(</span>event<span class="token punctuation">.</span>request<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">response</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      <span class="token comment">// 缓存命中，返回缓存</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>response<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> response
+      <span class="token punctuation">}</span>
+      <span class="token comment">// 缓存未命中，发起网络请求</span>
+      <span class="token keyword">return</span> <span class="token function">fetch</span><span class="token punctuation">(</span>event<span class="token punctuation">.</span>request<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">response</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+        <span class="token comment">// 动态缓存新资源</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>response<span class="token punctuation">.</span>status <span class="token operator">===</span> <span class="token number">200</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token keyword">const</span> responseClone <span class="token operator">=</span> response<span class="token punctuation">.</span><span class="token function">clone</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+          caches<span class="token punctuation">.</span><span class="token function">open</span><span class="token punctuation">(</span><span class="token constant">CACHE_NAME</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">cache</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+            cache<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span>event<span class="token punctuation">.</span>request<span class="token punctuation">,</span> responseClone<span class="token punctuation">)</span>
+          <span class="token punctuation">}</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> response
+      <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br></div></div><p><strong>注册 Service Worker:</strong></p> <div class="language-javascript line-numbers-mode"><pre class="language-javascript"><code><span class="token comment">// 文件: src/main.js</span>
+
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token string">'serviceWorker'</span> <span class="token keyword">in</span> navigator <span class="token operator">&amp;&amp;</span> process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">NODE_ENV</span> <span class="token operator">===</span> <span class="token string">'production'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  window<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'load'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    navigator<span class="token punctuation">.</span>serviceWorker
+      <span class="token punctuation">.</span><span class="token function">register</span><span class="token punctuation">(</span><span class="token string">'/service-worker.js'</span><span class="token punctuation">)</span>
+      <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">registration</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'Service Worker 注册成功:'</span><span class="token punctuation">,</span> registration<span class="token punctuation">)</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span>
+      <span class="token punctuation">.</span><span class="token function">catch</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">error</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+        console<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span><span class="token string">'Service Worker 注册失败:'</span><span class="token punctuation">,</span> error<span class="token punctuation">)</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br></div></div><hr> <h3 id="方案-c-灰度发布-金丝雀部署"><a href="#方案-c-灰度发布-金丝雀部署" class="header-anchor">#</a> 方案 C: 灰度发布（金丝雀部署）</h3> <p><strong>适用场景:</strong> 重大更新需要小流量验证</p> <div class="language-javascript line-numbers-mode"><pre class="language-javascript"><code><span class="token comment">// 文件: nginx.conf (入口服务器)</span>
+
+upstream cdn_stable <span class="token punctuation">{</span>
+    server cdn<span class="token punctuation">.</span>creditumex<span class="token punctuation">.</span>com<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+upstream cdn_canary <span class="token punctuation">{</span>
+    server cdn<span class="token punctuation">.</span>creditumex<span class="token punctuation">.</span>com<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+server <span class="token punctuation">{</span>
+    listen <span class="token number">80</span><span class="token punctuation">;</span>
+    server_name h5<span class="token punctuation">.</span>creditumex<span class="token punctuation">.</span>com<span class="token punctuation">;</span>
+
+    location <span class="token operator">/</span> <span class="token punctuation">{</span>
+        # <span class="token number">10</span><span class="token operator">%</span> 流量走金丝雀版本
+        <span class="token keyword">set</span> $upstream cdn_stable<span class="token punctuation">;</span>
+        
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>$request_id <span class="token operator">~</span><span class="token operator">*</span> <span class="token string">&quot;^[0-1]&quot;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">set</span> $upstream cdn_canary<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        # 稳定版本
+        <span class="token keyword">set</span> $stable_version <span class="token string">&quot;v0.1.0-20250115&quot;</span><span class="token punctuation">;</span>
+        # 金丝雀版本
+        <span class="token keyword">set</span> $canary_version <span class="token string">&quot;v0.1.1-20250116&quot;</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>$upstream <span class="token operator">=</span> <span class="token string">&quot;cdn_stable&quot;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token number">302</span> <span class="token literal-property property">https</span><span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>cdn<span class="token punctuation">.</span>creditumex<span class="token punctuation">.</span>com<span class="token operator">/</span>h5<span class="token operator">/</span>hw<span class="token operator">-</span>prestaveloz<span class="token operator">-</span>h5<span class="token operator">/</span>$stable_version$request_uri<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>$upstream <span class="token operator">=</span> <span class="token string">&quot;cdn_canary&quot;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token number">302</span> <span class="token literal-property property">https</span><span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>cdn<span class="token punctuation">.</span>creditumex<span class="token punctuation">.</span>com<span class="token operator">/</span>h5<span class="token operator">/</span>hw<span class="token operator">-</span>prestaveloz<span class="token operator">-</span>h5<span class="token operator">/</span>$canary_version$request_uri<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br></div></div><p><strong>Jenkins Pipeline 支持:</strong></p> <div class="language-groovy line-numbers-mode"><pre class="language-groovy"><code><span class="token function">stage</span><span class="token punctuation">(</span><span class="token string">'灰度发布'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    when <span class="token punctuation">{</span>
+        expression <span class="token punctuation">{</span> params<span class="token punctuation">.</span>CANARY_ENABLED <span class="token operator">==</span> <span class="token boolean">true</span> <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    steps <span class="token punctuation">{</span>
+        script <span class="token punctuation">{</span>
+            <span class="token comment">// 上传金丝雀版本</span>
+            sh <span class="token interpolation-string"><span class="token string">&quot;&quot;&quot;
+                ./ossutil64 cp -r </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">COPY_SOURCE_PATH</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/ \
+                    oss://</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">CDN_BUCKET</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">NGINX_HTML_PATH</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">VERSION_PATH</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/
+            &quot;&quot;&quot;</span></span>
+            
+            <span class="token comment">// 更新 Nginx 配置中的 canary_version</span>
+            sh <span class="token interpolation-string"><span class="token string">&quot;&quot;&quot;
+                kubectl exec -it nginx-xxx -- \
+                    sed -i 's/canary_version &quot;.*&quot;/canary_version &quot;</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">VERSION_PATH</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">&quot;/' /etc/nginx/nginx.conf
+                kubectl exec -it nginx-xxx -- nginx -s reload
+            &quot;&quot;&quot;</span></span>
+            
+            echo <span class="token interpolation-string"><span class="token string">&quot;金丝雀版本已部署: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token expression">VERSION_PATH</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">&quot;</span></span>
+            echo <span class="token interpolation-string"><span class="token string">&quot;10% 流量将访问新版本，观察 10 分钟后决定是否全量发布&quot;</span></span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br></div></div><hr> <h2 id="📚-参考资料"><a href="#📚-参考资料" class="header-anchor">#</a> 📚 参考资料</h2> <h3 id="官方文档"><a href="#官方文档" class="header-anchor">#</a> 官方文档</h3> <ul><li><a href="https://help.aliyun.com/product/27099.html" target="_blank" rel="noopener noreferrer">阿里云 CDN 文档<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li> <li><a href="https://help.aliyun.com/product/31815.html" target="_blank" rel="noopener noreferrer">阿里云 OSS 文档<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li> <li><a href="https://help.aliyun.com/document_detail/120075.html" target="_blank" rel="noopener noreferrer">ossutil 工具文档<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li> <li><a href="https://webpack.js.org/configuration/output/" target="_blank" rel="noopener noreferrer">Webpack Output 配置<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul> <h3 id="最佳实践"><a href="#最佳实践" class="header-anchor">#</a> 最佳实践</h3> <ul><li><a href="https://web.dev/performance-optimizing-content-efficiency/" target="_blank" rel="noopener noreferrer">前端资源 CDN 优化实战<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li> <li><a href="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching" target="_blank" rel="noopener noreferrer">多版本静态资源管理方案<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li> <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API" target="_blank" rel="noopener noreferrer">Service Worker 入门<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul> <h3 id="工具推荐"><a href="#工具推荐" class="header-anchor">#</a> 工具推荐</h3> <ul><li><a href="https://www.cdnplanet.com/tools/cdnperfcheck/" target="_blank" rel="noopener noreferrer">CDN Performance Checker<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li> <li><a href="https://www.webpagetest.org/" target="_blank" rel="noopener noreferrer">WebPageTest<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> - 全球性能测试</li> <li><a href="https://gtmetrix.com/" target="_blank" rel="noopener noreferrer">GTmetrix<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> - 性能分析报告</li></ul> <hr> <h2 id="📝-总结"><a href="#📝-总结" class="header-anchor">#</a> 📝 总结</h2> <h3 id="✅-方案优势总结"><a href="#✅-方案优势总结" class="header-anchor">#</a> ✅ 方案优势总结</h3> <ol><li><strong>性能提升 60%+</strong> - 全球 CDN 加速，缓存命中率 95%</li> <li><strong>100% 可靠性</strong> - 版本隔离，零停机发布</li> <li><strong>成本极低</strong> - 月成本约 $4（¥30），远低于服务器带宽成本</li> <li><strong>运维简单</strong> - 集成到 Jenkins，一键发布自动清理</li> <li><strong>可扩展性</strong> - 支持灰度发布、A/B 测试、PWA 离线缓存</li></ol> <h3 id="🎯-与-k8s-pvc-方案对比"><a href="#🎯-与-k8s-pvc-方案对比" class="header-anchor">#</a> 🎯 与 K8s PVC 方案对比</h3> <table><thead><tr><th>维度</th> <th>CDN 方案</th> <th>K8s PVC 方案</th> <th>结论</th></tr></thead> <tbody><tr><td><strong>性能</strong></td> <td>⭐⭐⭐⭐⭐ 全球加速</td> <td>⭐⭐⭐ 单区域</td> <td>CDN 胜出</td></tr> <tr><td><strong>成本</strong></td> <td>⭐⭐⭐⭐ $4/月</td> <td>⭐⭐⭐⭐⭐ $1/月</td> <td>PVC 更便宜</td></tr> <tr><td><strong>可靠性</strong></td> <td>⭐⭐⭐⭐⭐ 99.9% SLA</td> <td>⭐⭐⭐⭐ 依赖 K8s</td> <td>CDN 更稳定</td></tr> <tr><td><strong>实施难度</strong></td> <td>⭐⭐⭐ 需配置 CDN</td> <td>⭐⭐⭐⭐ 只需 PVC</td> <td>PVC 更简单</td></tr> <tr><td><strong>扩展性</strong></td> <td>⭐⭐⭐⭐⭐ 全球分发</td> <td>⭐⭐⭐ 单集群</td> <td>CDN 更强</td></tr></tbody></table> <h3 id="🚀-推荐实施路线"><a href="#🚀-推荐实施路线" class="header-anchor">#</a> 🚀 推荐实施路线</h3> <p><strong>阶段 1: MVP 快速验证（1 周）</strong></p> <ul><li>配置阿里云 CDN 和 OSS</li> <li>修改 vue.config.js 和环境变量</li> <li>Jenkins Pipeline 集成上传脚本</li> <li>测试环境验证</li></ul> <p><strong>阶段 2: 生产环境试点（1 周）</strong></p> <ul><li>生产环境 CDN 配置</li> <li>主域名 Nginx 重定向</li> <li>监控指标和告警</li> <li>用户反馈收集</li></ul> <p><strong>阶段 3: 优化增强（2 周）</strong></p> <ul><li>前端版本检测（方案 A）</li> <li>自动清理脚本优化</li> <li>性能监控报表</li> <li>成本优化（流量包、压缩）</li></ul> <p><strong>阶段 4: 高级特性（可选）</strong></p> <ul><li>Service Worker 离线缓存（方案 B）</li> <li>灰度发布能力（方案 C）</li> <li>多区域 CDN 优化</li> <li>智能预加载</li></ul> <hr> <h2 id="🎉-开始实施"><a href="#🎉-开始实施" class="header-anchor">#</a> 🎉 开始实施</h2> <p>准备好开始了吗？按照以下步骤启动 CDN 多版本管理方案：</p> <div class="language-bash line-numbers-mode"><pre class="language-bash"><code><span class="token comment"># 1. 配置阿里云 CDN（参考&quot;步骤 6&quot;）</span>
+<span class="token comment"># 2. 修改 vue.config.js（参考&quot;步骤 1&quot;）</span>
+<span class="token comment"># 3. 更新环境变量（参考&quot;步骤 2&quot;）</span>
+<span class="token comment"># 4. 修改 Jenkinsfile（参考&quot;步骤 4&quot;）</span>
+<span class="token comment"># 5. 首次构建发布（参考&quot;部署流程&quot;）</span>
+<span class="token comment"># 6. 验证和监控（参考&quot;运维管理&quot;）</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><p><strong>预计实施时间:</strong> 1-2 周<br> <strong>预期效果:</strong> 页面加载速度提升 60%，用户体验显著改善</p> <hr> <p><em>文档版本: v1.0</em><br> <em>最后更新: 2025-01-15</em><br> <em>维护者: PrestaVeloz 前端团队</em></p></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">最后更新时间:</span> <span class="time">10/17/2025, 5:07:57 PM</span></div></footer> <div class="page-nav"><p class="inner"><!----> <span class="next"><a href="/blog/work/gitversion.html">
+        分支管理
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/blog/assets/js/app.4446cea9.js" defer></script><script src="/blog/assets/js/2.272a5ce0.js" defer></script><script src="/blog/assets/js/1.4a558552.js" defer></script><script src="/blog/assets/js/56.c47fb2a7.js" defer></script>
+  </body>
+</html>
